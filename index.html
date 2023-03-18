@@ -1,37 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Homework</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header>Headfdffdfer</header>
+  <header class="container">
+    <h2 class="header">Заголовки</h2>
+    <h1>h1</h1>
+    <h2>h2</h2>
+    <h3>h3</h3>
+    <h4>h4</h4>
+    <h5>h5</h5>
+    <h6>h6</h6>
+  </header>
+
   <main>
-    <aside>Sidebar</aside>
-    <section>
+    <div class="container">
+
+      <h2 class="header">Параграф</h2>
+      <p>
+        Это параграф, в котором есть слово <b>выделенное жирным</b>, <i>курсивом</i> и <u>подчеркнутое</u>
+      </p>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Маркированный список</h2>
       <ul>
-        <li>First</li>
-        <li>Second</li>
-        <li>Third</li>
+        <li>Первый пункт</li>
+        <li>Второй пункт</li>
+        <li>Третий пункт</li>
       </ul>
-    </section>
-    <section>
-      <label for="first_name">First name:</label>
-      <input id="first_name" type="text" />
-    </section>
 
-    <section>
-      <label for="second_name">Second name:</label>
-      <input id="second_name" type="text" />
-    </section>
+      <h2 class="header">Нумерованный список</h2>
+      <ol>
+        <li>Первый пункт</li>
+        <li>Второй пункт</li>
+        <li>Третий пункт</li>
+      </ol>
 
-    <section>
-      <div id="result" type="text"></div>
-      <div><button>Send</button></div>
-    </section>
-  </main>
-  <footer>Footer</footer>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Поля ввода</h2>
+
+      <form>
+        <div>Ваше имя</div>
+        <input type="text" name="name" required="required">
+
+        <div>Ваш email</div>
+        <input type="email" name="email" required="required">
+
+        <div>Сообщение</div>
+        <textarea name="message"></textarea>
+
+        <div>Выберите дату</div>
+        <input name="guruweba_example_date" type="date" />
+
+        <div>Checkbox</div>
+        <input name="guruweba_example_checkbox" type="checkbox" />
+
+        <div>Radio</div>
+        <input id="radio_1" name="guruweba_example_radio" type="radio" value="1" />
+        <label for="radio_1">Положение 1</label><br />
+        <input id="radio_2" name="guruweba_example_radio" type="radio" value="2" />
+        <label for="radio_2">Положение 2</label><br />
+        <input id="radio_3" name="guruweba_example_radio" type="radio" value="3" />
+        <label for="radio_3">Положение 3</label><br />
+
+        <div>Button send</div>
+        <button onclick="alert('Вы нажали кнопку');">Отправить</button>
+
+      </form>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Таблица</h2>
+      <table border="2" width="300px">
+        <tr>
+          <td colspan="3">Ячейка 1</td>
+        </tr>
+        <tr>
+          <td colspan="3">Ячейка 2</td>
+        </tr>
+        <tr>
+          <td>Ячейка 3</td>
+          <td>Ячейка 4</td>
+          <td>Ячейка 5</td>
+        </tr>
+        <tr>
+          <td>Ячейка 6</td>
+          <td>Ячейка 7</td>
+          <td>Ячейка 8</td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="container">
+      <h2 class="header">Выпадающий список</h2>
+      <div class="guruweba_example_infofield">Какая температура для вас более комфортная?</div>
+      <select name="theme" required="required">
+        <option value="">Выберите вариант</option>
+        <option>0</option>
+        <option>+10</option>
+        <option>-10</option>
+        <option>+40</option>
+        <option>-40</option>
+      </select>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Изображения</h2>
+      <div>Image JPG</div>
+      <img src="image.jpg" width="400" height="300">
+
+
+      <div>Image SVG</div>
+      <img src="imageSVG.svg" width="400" height="300">
+
+    </div>
 </body>
+
 </html>
