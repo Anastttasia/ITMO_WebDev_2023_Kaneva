@@ -5,33 +5,66 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    html{
+      font-size: 12px;
+      background-color: #cccccc;
+    }
+
+    .card{
+      width: 220px;
+      margin: 0 auto;
+      text-align: center;
+      border: 1px solid #222;
+    }
+
+    .card.img{
+      margin: 0.5rem;
+    }
+
+    p:not(:last-child){
+      margin-bottom: 1rem;
+    }
+
+    p{
+      margin-bottom: 1rem;
+    }
+
+    button{
+      border: none;
+      width: 100%;
+      background-color: black;
+      color: white;
+      padding: 0.5rem 0;
+    }
+
+    button:hover{
+      background-color: #444;
+    }
+
+    .card > h1 {
+      font-size: 2rem;
+      line-height: 0.85;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .card > price{
+      color: #666;
+      font-size: 0.75rem;
+      font-weight: 300;
+    }
+    
+  </style>
 </head>
 <body>
-  <header>Headfdffdfer</header>
-  <main>
-    <aside>Sidebar</aside>
-    <section>
-      <ul>
-        <li>First</li>
-        <li>Second</li>
-        <li>Third</li>
-      </ul>
-    </section>
-    <section>
-      <label for="first_name">First name:</label>
-      <input id="first_name" type="text" />
-    </section>
-
-    <section>
-      <label for="second_name">Second name:</label>
-      <input id="second_name" type="text" />
-    </section>
-
-    <section>
-      <div id="result" type="text"></div>
-      <div><button>Send</button></div>
-    </section>
-  </main>
-  <footer>Footer</footer>
+  <div class="card">
+    <img src="jeans.jpg" alt="image" style="width: 200px;">
+    <h1>Tailor Jeans</h1>
+    <p class="price">$19.99</p>
+    <p>Some text about clothes</p>
+    <button>Let's go!</button>
+  </div>
 </body>
 </html>
