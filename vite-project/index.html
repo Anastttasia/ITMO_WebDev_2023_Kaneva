@@ -5,51 +5,70 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+  </style>
+
 </head>
 
-<body>
+<body class="bg-teal-100/50w-screen h-screen grid place-items-center p-12">
+  <div class="container flex flex-row w-full h-full bg-neutral-200 rounded-3xl p-4">
+    <aside class="flex flex-col min-w-[144px]">
 
-  <header class="header">
-    <div>
-      <img src="assets/images/logo.svg">
-    </div>
-    <nav class="nav">
-      <span class="navSlotHeader">Home</span>
-      <span class="navSlotHeader">New</span>
-      <span class="navSlotHeader">Popular</span>
-      <span class="navSlotHeader">Trending</span>
-      <span class="navSlotHeader">Categories</span>
-    </nav>
-  </header>
-  <main>
-    <div class="startPageContainer">
-
-      <div class="leftSide">
-
-        <div>
-          <img src="assets/images/image-web-3-desktop.jpg" style="width: 100%; height: 300px;">
+      <div class="flex flex-row items-center gap-x-2 py-4">
+        <i class="iconify-inline text-teal-700 text-3xl" data-icon="ph:cube-fill"></i>
+        <span class="font-bold text-xl">Taski</span>
+      </div>
+    </aside>
+    <main class="flex flex-col bg-gray-50 rounded-2xl w-full px-4 pt-2 pb-2 gap-y-2">
+      <div class="flex flex-row justify-between items-center ">
+        <div class="flex flex-col py-4">
+          <span class="text-lg font-bold">Team tasks</span>
         </div>
 
-        <div class="startPageText">
-          <h1>The Bright Future of Web 3.0?</h1>
-          <div class="startPageTextBlock">
-            <p class="text">We dive into the next evolution of the webn
-              that claims to put the power of the platforms
-              back into the hands of the people.
-              But is it really fulfilling its promise?
-            </p>
-            <button class="button">READ MORE</button>
+        <div class="flex flex-col">
+          <div class="flex flex-row gap-x-4 items-center gap-x-4">
+            <span class="text-neutral-400">Search</span>
+            <button class="px-3 py-2 bg-teal-600 rounded-xl">
+              <span class="text-white">+ Create Task</span></button>
           </div>
         </div>
       </div>
 
-      <div class="rightSide">
-        NEW
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-col py-4">
+          <span class="text-sm text-neutral-400">Filters</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex flex-row gap-x-4 items-center gap-x-8">
+            <span class="text-sm text-neutral-400">Sort by</span>
+            <span class="text-sm text-neutral-400">Group by: Status</span>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </main>
+      <div class="flex flex-row justify-between gap-x-4 h-full">
+        <div class="flex flex-col h-full w-1/3 bg-gray-200/80 rounded-xl">
+          <div class="flex flex-row justify-between">
+            <div class="">To Do</div>
+            <div>
+              <span>+</span>
+              <span>...</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col h-full w-1/3 bg-gray-200/80 rounded-xl">2</div>
+        <div class="flex flex-col h-full w-1/3 bg-gray-200/80 rounded-xl">3</div>
+      </div>
+    </main>
+  </div>
+
 </body>
 
 </html>
