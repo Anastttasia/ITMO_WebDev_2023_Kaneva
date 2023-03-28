@@ -10,6 +10,7 @@ body{
   max-width: 100%;
   padding: 5rem 10rem 5rem 10rem;
   display: flex;
+  flex-direction: column;
   align-content: center;
 }
 
@@ -24,7 +25,7 @@ body{
 .nav{
   width: 35%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 15px;
 }
 
@@ -34,4 +35,70 @@ body{
 
 .navSlotHeader:hover{
   color: red;
+}
+
+main{
+  padding: 3rem 0 3rem 0;
+}
+
+.startPageContainer{
+  display: grid;
+    max-width: 100%;
+    grid-template-columns: 2.5fr 1fr;
+    grid-column-gap: 1.5rem;
+
+}
+
+.leftSide{
+  display: flex;
+  flex-direction: column;
+}
+
+.startPageText{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  align-items: flex-end;
+}
+
+.startPageText > h1 {
+  font-size: 50px;
+  color: #020120;
+  font-weight: 800;
+}
+
+.startPageTextBlock{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 4rem;
+}
+
+.rightSide{
+  height: 510px;
+  background-color: #00001a;
+  color: wheat;
+}
+
+.text{
+ font-size: 15px;
+ color: rgba(2, 4, 29, 0.8);
+ text-align: start;
+}
+
+.button{
+  width: 185px;
+  height: 50px;
+  text-align: center;
+  color: white;
+  background-color: #f15d51;
+  border: none;
+  letter-spacing: 5px
+}
+
+.button:hover{
+  background-color:  #00001a;
 }
