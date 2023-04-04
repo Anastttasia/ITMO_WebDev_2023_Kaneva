@@ -18,21 +18,58 @@
 </head>
 
 <body>
+
   <div id="app">
     <div style="margin-bottom: 1rem">
-      <span>Name:</span>
-      <input id="inpName" />
+      <h2 class="text-blue-500 text-xl pb-5">Calculator</h2>
+      <span>Number 1:</span>
+      <input class="border-2 border-blue-200" id="firstNumber" />
     </div>
     <div style="margin-bottom: 1rem">
-      <span>Surname:</span>
-      <input id="inpSurname" />
+      <span>Number 2:</span>
+      <input class="border-2 border-blue-200" id="inpSurname" />
     </div>
-    <div>
-      Result:
-      <div id="conResult"></div>
+    <div class="flex flex-row text-3xl gap-x-5 pl-20">
+      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="sum(this)">+</button>
+      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="min(this)">-</button>
+      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="proiz(this)">*</button>
+      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="del(this)">:</button>
     </div>
+    Result:
+    <div id="conResult"></div>
   </div>
-  <script type="module" src="main.js"></script>
+  <script>
+
+    let a = document.getElementById("firstNumber").value;
+    a = parseInt(a);
+    let b = document.getElementById("inpSurname").value;
+    b = parseInt(b);
+    let result;
+
+    function getResult(a, b, result) {
+      document.getElementById("conResult").innerHTML = result;
+    }
+
+    function sum(a, b, result) {
+      result = a + b;
+      getResult(result);
+    }
+
+    function min(a, b, result) {
+      result = a - b;
+      getResult(result);
+    }
+
+    function proiz(a, b, result) {
+      result = a * b;
+      getResult(result);
+    }
+
+    function del(a, b, result) {
+      result = a / b;
+      getResult(result);
+    }
+  </script>
 </body>
 
 </html>
