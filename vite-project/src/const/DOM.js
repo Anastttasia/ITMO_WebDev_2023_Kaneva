@@ -13,7 +13,10 @@ const Keys = {
       } 
     },
       Popup: {
-      CREATE_TASK: "popupCreateTask"
+      CREATE_TASK: "popupCreateTask",
+      CreateTask: {
+        TITLE: 'title',
+      }
     },
   },
 };

@@ -23,7 +23,7 @@
     <div class="flex flex-col min-w-[377px] bg-white p-6 rounded-2xl gap-y-4">
 
       <div class="flex flex-row justify-between">
-        <span class="text-xl font-bold">Create task</span>
+        <span class="text-xl font-bold" data-id="title">Create task</span>
         <button data-id="btnCloseCreatTaskPopup" class="">
           <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-2xl"
             data-icon="radix-icons:cross-circled"></i>
@@ -126,7 +126,7 @@
           <div class="flex flex-row pt-2">
             <div class="flex flex-col justify-start w-full gap-y-4 justify-between">
               <div id="tempalateTask" class=" flex flex-row shadow rounded0lg px-3 py-3 bg-neutral-50 border-1 border-neutral-100">
-                <div class="flex flex-col w-full gap-y-3">
+                <div class="flex flex-col w-full gap-y-3 pointer-evets-none">
                   <span data-id="tempalateTaskTitle" class="font-bold">Layout Design</span>
                   <div class="flex flex-row justify-between">
                     <div class="flex flex-row gap-x-2">
