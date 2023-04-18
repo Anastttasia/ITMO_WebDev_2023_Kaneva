@@ -12,11 +12,11 @@ class TaskVO {
   static fromJSON(json) {
     return new TaskVO(json.id, json.title, json.date, json.tag);
   }
-  constructor(id, title, date, status) {
+  constructor(id, title, date, tag) {
     this.id = id;
-    this.title = title
-    this.date = date
-    this.status = status
+    this.title = title;
+    this.date = date;
+    this.tag = tag;
   }
 }
 
@@ -66,31 +66,24 @@ function renderTask(taskVO) {
   domTaskColumn.prepend(domTaskClone);
 }
 
-function renderTaskPopup(popupTitle, btConfirmText, confirmCallback) {
-  const domPopupCreateTask = getDOM(Keys.DOM.Popup.CREATE_TASK);
-  const domBtnClose = QUERY(domPopupCreateTask, Keys.DOM.Button.CLOSE_CREATE_TASK_POPUP);
-  const domBtnConfirm = QUERY(domPopupCreateTask, Keys.DOM.Button.POPUP_CREATE_TASK_CONFIRM);
-  const domTitle = QUERY(domPopupCreateTask, Keys.DOM.Popup.CreateTask.TITLE);
+async function renderTaskPopup(popupTitle, ConfirmText, confirmCallback) {
+  const domPopupContainer = getDOM(Keys.DOM.Popup.CONTAINER);
+  const domSpinner = domPopupContainer.querySelector('.spinner');
 
-  domBtnConfirm.innerText = btConfirmText;
-  domTitle.innerText = popupTitle;
+  domPopupContainer.classList.remove('hidden');
 
-  const onClosePopup = () => {
-    domPopupCreateTask.classList.add('hidden');
-    domBtnClose.onclick = null;
-    domBtnConfirm.onclick = null;
-  };
+  const TaskPopup = (await import('./src/const/view/popup/TaskPopup')).default;
+  const taskPopupInstasce = new TaskPopup(popupTitle, Tags, ConfirmText, confirmCallback, () => {
+    domPopupContainer.children[0].remove();
+    domPopupContainer.append(domSpinner);
+    domPopupContainer.classList.add('hidden');
+    }
+  );
 
-  domPopupCreateTask.classList.remove('hidden');
+  setTimeout(() => {
+    domSpinner.remove();
+    domPopupContainer.append(taskPopupInstasce.render());
+  }, 1000);
 
-  domBtnClose.onclick = onClosePopup;
-
-  domBtnConfirm.onclick = () => {
-    const taskTitle = randomString(12);
-    const taskDate = randomString(12);
-    const taskTags= Tags[0];
-
-    confirmCallback && confirmCallback(taskTitle, taskDate, taskTags);
-    onClosePopup();
-  };
+  return;
 };
