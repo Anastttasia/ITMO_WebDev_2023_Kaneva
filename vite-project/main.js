@@ -78,6 +78,7 @@ async function renderTaskPopup(popupTitle, ConfirmText, confirmCallback) {
     domPopupContainer.append(domSpinner);
     domPopupContainer.classList.add('hidden');
     }
+    
   );
 
   setTimeout(() => {

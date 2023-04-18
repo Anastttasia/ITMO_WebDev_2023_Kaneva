@@ -68,6 +68,7 @@ class TaskPopup {
       domBtnClose.onclick = null;
       domBtnConfirm.onclick = null;
       this.#closeCallback();
+      
     };
 
     domBtnClose.onclick = onClosePopup;
