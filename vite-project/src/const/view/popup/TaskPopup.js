@@ -14,6 +14,12 @@ class TaskPopup {
     this.#closeCallback = closeCallback;
   }
 
+  #taskTitle = '';
+
+  set taskTitle(value){
+    this.#taskTitle = value;
+  }
+
   render() {
     const div = document.createElement('div');
     div.innerHTML =
@@ -29,8 +35,12 @@ class TaskPopup {
       <div class="flex flex-row">
         <div class="flex flex-col w-full">
           <label class="ml-1 text-sm text-neutral-600" for="inpDate">Title: </label>
-          <input class="bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200" id="inpTitle" type="text"
-            placeholder="e.g. Read books" />
+          <input 
+          class="bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200" 
+          data-id="inpTitle" 
+          type="text"
+          value="${this.#taskTitle}"
+          placeholder="e.g. Read books" />
         </div>
       </div>
       <div class="flex flex-row">
@@ -63,22 +73,19 @@ class TaskPopup {
 
     const domBtnClose = popup.querySelector(`[data-id="btnclose"]`);
     const domBtnConfirm = popup.querySelector(`[data-id="btnConfirm"]`);
+    const domInpTitle = popup.querySelector(`[data-id="inpTitle"]`);
 
-    const onClosePopup = () => {
+    domBtnClose.onclick = () => {
       domBtnClose.onclick = null;
       domBtnConfirm.onclick = null;
       this.#closeCallback();
-      
     };
-
-    domBtnClose.onclick = onClosePopup;
 
     domBtnConfirm.onclick = () => {
       const taskTitle = randomString(12);
       const taskDate = Date.now();
       const taskTags = '';//Tags[0];
       this.#confirmCallback(taskTitle, taskDate, taskTags);
-      onClosePopup();
     };
 
     return div.children[0];
