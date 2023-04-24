@@ -1,4 +1,4 @@
-import { randomString } from "../../utils/stringUtils";
+
 
 class TaskPopup {
   #title;
@@ -69,6 +69,8 @@ class TaskPopup {
     </div>
     `;
 
+    console.log('div.firstChild', div.children);
+
     const popup = div.children[0];
 
     const domBtnClose = popup.querySelector(`[data-id="btnclose"]`);
@@ -82,9 +84,9 @@ class TaskPopup {
     };
 
     domBtnConfirm.onclick = () => {
-      const taskTitle = randomString(12);
+      const taskTitle = domInpTitle.value;
       const taskDate = Date.now();
-      const taskTags = '';//Tags[0];
+      const taskTags = this.#tags[0];
       this.#confirmCallback(taskTitle, taskDate, taskTags);
     };
 

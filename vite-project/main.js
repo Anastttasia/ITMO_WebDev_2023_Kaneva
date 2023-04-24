@@ -1,8 +1,7 @@
 // import "uno.css";
 // import '@unocss/reset/tailwind.css';
 import { fromJSON } from "postcss";
-import Keys from "./src/const/DOM";
-import { randomString } from "./src/const/utils/stringUtils";
+import Dom from "./src/const/DOM";
 
 const KEY_LOCAL_TASKS = 'tasks';
 
@@ -18,15 +17,12 @@ class TaskVO {
     this.date = date;
     this.tag = tag;
   }
-
 }
-
-
 
 const getDOM = (id) => document.getElementById(id);
 const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
 
-const domTemplateTask = getDOM(Keys.DOM.Template.TASK);
+const domTemplateTask = getDOM(Dom.Template.TASK);
 const domTaskColumn = domTemplateTask.parentNode;
 domTemplateTask.removeAttribute('id');
 domTemplateTask.remove();
@@ -37,22 +33,77 @@ const tasks = rawTasks ? JSON.parse(rawTasks).map((json) => TaskVO.fromJSON(json
 tasks.forEach((taskVO) => renderTask(taskVO));
 console.log("> tasks:", tasks);
 
+const taskOperations = {
+  [Dom.Template.Task.BTN_DELETE]: (taskVO, domTask) => {
+    renderTaskPopup(
+      taskVO,
+      'Confirm delete task?',
+      'Delete',
+      (taskTitle, taskDate, taskTag) => {
+        console.log('> Delete task -> On Confirm', {
+          taskTitle,
+          taskDate,
+          taskTag,
+        });
+        const indexOfTask = tasks.indexOf(taskVO);
+        tasks.splice(indexOfTask )
+        domTaskColumn.removeChild(domTask);
+        saveTask();
+      }
+    );
+  },
+  [Dom.Template.Task.BTN_EDIT]: (taskVO, domTask) => {
+    renderTaskPopup(
+      taskVO,
+      'Update task',
+      'Update',
+      (taskTitle, taskDate, taskTag) => {
+        console.log('> Update task -> On Confirm', {
+          taskTitle,
+          taskDate,
+          taskTag,
+        });
+        taskVO.title = taskTitle;
+        const domTaskUpdated = renderTask(taskVO);
+        domTaskColumn.replaceChild(domTaskUpdated, domTask);
+        saveTask();
+      }
+    );
+  },
+};
+
 domTaskColumn.onclick = (e) => {
   e.stopPropagation();
   console.log('domTaskColumn', e.target);
-  const taskID = e.target.dataset.id;
-  if(!taskID) return;
+  const domTaskElement = e.target;
+  const taskBtn = domTaskElement.dataset.btn;
 
-  const taskVO = tasks.find((task) => task.id === taskID);
-  console.log('. taskVO:', taskVO);
-  renderTaskPopup(taskVO, 'Update task', 'Update', (taskTitle, taskDate, taskTags) => {
-    console.log('> Update task -> On Confirm',{ taskTitle, taskDate, taskTags});
-    taskVO.title = taskTitle;
+  const isNotTaskBtn = !taskBtn;
+  if (isNotTaskBtn) return;
+
+  const allowedButtons = [
+    Dom.Template.Task.BTN_EDIT,
+    Dom.Template.Task.BTN_DELETE,
+  ];
+  if (!allowedButtons.includes(taskBtn)) return;
+
+  let taskId;
+  let domTask = domTaskElement;
+  do {
+    domTask = domTask.parentNode;
+    taskId = domTask.dataset.id;
+  } while (!taskId);
+
+  const taskVO = tasks.find((task) => task.id === taskId);
+  console.log('> taskVO:', taskVO);
+
+  const taskOperation = taskOperations[taskBtn];
+  if (taskOperation) {
+    taskOperation(taskVO, domTask);
   }
-  );
 };
 
-getDOM(Keys.DOM.Button.CREATE_TASK).onclick = () => {
+getDOM(Dom.Button.CREATE_TASK).onclick = () => {
   console.log('. domPopupCreateTask.classList');
   renderTaskPopup(null, 'Create task', 'Create', (taskTitle, taskDate, taskTags) => {
     console.log('Main > Create task -> On Confirm');
@@ -61,11 +112,7 @@ getDOM(Keys.DOM.Button.CREATE_TASK).onclick = () => {
     
     renderTask(taskVO);
     tasks.push(taskVO);
-    console.log('confirm', taskVO);
 
-    taskVO.title = taskTitle;
-    const domUpdateTask = renderTask(taskVO);
-    domTaskColumn.replaceChild(domUpdateTask, domTaskSelected);
     saveTask();
   });
 };
@@ -73,13 +120,13 @@ getDOM(Keys.DOM.Button.CREATE_TASK).onclick = () => {
 function renderTask(taskVO) {
   const domTaskClone = domTemplateTask.cloneNode(true);
   domTaskClone.dataset.id = taskVO.id;
-  QUERY(domTaskClone, Keys.DOM.Template.Task.TITLE).innerText = taskVO.title;
+  QUERY(domTaskClone, Dom.Template.Task.TITLE).innerText = taskVO.title;
   domTaskColumn.prepend(domTaskClone);
   return domTaskClone;
 }
 
 async function renderTaskPopup(taskVO, popupTitle, ConfirmText, processDataCallback) {
-  const domPopupContainer = getDOM(Keys.DOM.Popup.CONTAINER);
+  const domPopupContainer = getDOM(Dom.Popup.CONTAINER);
   const domSpinner = domPopupContainer.querySelector('.spinner');
 
   domPopupContainer.classList.remove('hidden');
@@ -91,17 +138,17 @@ async function renderTaskPopup(taskVO, popupTitle, ConfirmText, processDataCallb
   }
 
   const TaskPopup = (await import('./src/const/view/popup/TaskPopup')).default;
-  const taskPopupInstasce = new TaskPopup(popupTitle, Tags, ConfirmText, processDataCallback, (taskTitle, taskDate, taskTags) => {
+  const taskPopupInstasce = new TaskPopup(popupTitle, Tags, ConfirmText, (taskTitle, taskDate, taskTags) => {
     console.log('Main => processDataCallback', { taskTitle, taskDate, taskTags })
     processDataCallback(taskTitle, taskDate, taskTags);
     onClosePopup();
-  }
+  },
+  onClosePopup
   );
 
   if(taskVO){
     taskPopupInstasce.TaskTitle= taskVO.title;
   }
-
 
   setTimeout(() => {
     domSpinner.remove();
@@ -114,8 +161,8 @@ async function renderTaskPopup(taskVO, popupTitle, ConfirmText, processDataCallb
     domPopupContainer.append(taskPopupInstasce.render());
   }, 1000);
 
-  return;
 };
 
-
-function saveTask(){localStorage.setItem(KEY_LOCAL_TASKS, JSON.stringify(tasks));}
+function saveTask() {
+  localStorage.setItem(KEY_LOCAL_TASKS, JSON.stringify(tasks));
+}

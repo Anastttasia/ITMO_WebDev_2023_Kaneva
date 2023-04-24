@@ -71,9 +71,9 @@
       <div class="flex flex-row justify-between items-center">
         <div class="flex flex-col">
           <div class="flex flex-row items-center gap-x-1 text-neutral-400">
-            <i class="iconify-inline hover: text-neutral-600" data-icon="material-symbols:filter-alt"></i>
+            <i class="iconify-inline hover: text-neutral-400" data-icon="material-symbols:filter-alt"></i>
             <span class="text-xs">Filters</span>
-            <i class="iconify-inline hover: text-neutral-600" data-icon="mdi:chevron-down"></i>
+            <i class="iconify-inline hover: text-neutral-400" data-icon="mdi:chevron-down"></i>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
           <div class="flex flex-row items-center gap-x-8">
             <div class="flex flex-row text-neutral-400 gap-x-1">
               <span class="text-xs">Sort by</span>
-              <i class="iconify-inline hover: text-neutral-600" data-icon="mdi:chevron-down"></i>
+              <i class="iconify-inline hover: text-neutral-400" data-icon="mdi:chevron-down"></i>
             </div>
             <div class="flex flex-row">
               <div class="flex flex-col">
@@ -89,7 +89,7 @@
                   <span class="text-xs px-1">Group by:</span>
                   <div class="flex flex-row">
                     <span class="text-xs">Status</span>
-                    <i class="iconify-inline hover: text-neutral-600" data-icon="mdi:chevron-down"></i>
+                    <i class="iconify-inline hover: text-neutral-400" data-icon="mdi:chevron-down"></i>
                   </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      <hr/>
+      <hr />
       <div class="flex flex-row justify-between gap-x-4">
         <div class="flex flex-col h-full w-1/2 bg-gray-200 border-1 border-grey-300/50 rounded-xl p-2">
           <div class="flex flex-row justify-between py-1 px-1">
@@ -109,11 +109,12 @@
           </div>
           <div class="flex flex-row pt-2">
             <div class="flex flex-col justify-start w-full gap-y-4 justify-between">
+
               <div id="tempalateTask"
                 class=" flex flex-row shadow rounded0lg px-3 py-3 bg-neutral-50 border-1 border-neutral-100">
-                <div class="flex flex-col w-full gap-y-3 pointer-evets-none">
-                  <span data-id="tempalateTaskTitle" class="font-bold">Layout Design</span>
-                  <div class="flex flex-row justify-between">
+                <div class="flex flex-col w-full gap-y-3">
+                  <span data-id="tempalateTaskTitle" class="font-bold pointer-evets-none">Layout Design</span>
+                  <div class="flex flex-row justify-between pointer-evets-none">
                     <div class="flex flex-row gap-x-2">
                       <div class=" text-xs rounded-lg py-1 px-2 bg-neutral-200/60 text-neutral-600"> Update </div>
                       <div class=" text-xs rounded-lg py-1 px-2 bg-neutral-200/60 text-neutral-600"> Web 12</div>
@@ -124,13 +125,23 @@
                     </div>
                   </div>
 
-                  <div class="flex flex-row -space-x-2">
-                    <span class="w-6 h-6 rounded-full bg-green-300 border-2 border-green-500"></span>
-                    <span class="w-6 h-6 rounded-full bg-blue-300 border-2 border-blue-500"></span>
-                    <span class="w-6 h-6 rounded-full bg-yellow-300 border-2 border-yellow-500"></span>
-                    <span class="grid place-items-center w-6 h-6 rounded-full bg-blue-300 border-2 border-blue-500">
-                      <span class="text-xs font-bold text-blue-600">+2</span>
-                    </span>
+                  <div class="flex flex-row justify-between">
+                    <div class="flex flex-row -space-x-2 pointer-evets-none">
+                      <span class="w-6 h-6 rounded-full bg-green-300 border-2 border-green-500"></span>
+                      <span class="w-6 h-6 rounded-full bg-blue-300 border-2 border-blue-500"></span>
+                      <span class="w-6 h-6 rounded-full bg-yellow-300 border-2 border-yellow-500"></span>
+                      <span class="grid place-items-center w-6 h-6 rounded-full bg-blue-300 border-2 border-blue-500">
+                        <span class="text-xs font-bold text-blue-600">+2</span>
+                      </span>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                      <button data-btn="btnEdit">
+                        <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-xl pointer-evets-none" data-icon="material-symbols:edit"></i>
+                      </button>
+                      <button data-btn="btnclose">
+                        <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-xl pointer-evets-none" data-icon="material-symbols:delete"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,4 @@
-const Keys = {
-  DOM: {
+const Dom = {
     Button: {
       CREATE_TASK: "btnCreateTask",
       CLOSE_CREATE_TASK_POPUP: "btnCloseCreatTaskPopup",
@@ -9,17 +8,17 @@ const Keys = {
       TASK: "tempalateTask",
       Task:{
         TITLE: "tempalateTaskTitle",
-
+        BTN_EDIT: 'btnEdit',
+        BTN_DELETE: 'btnDelete',
       } 
     },
       Popup: {
       CONTAINER: "popupContainer",
       CreateTask: {
         TITLE: 'title',
-        
+
       }
     },
-  },
-};
+  };
 
-export default Keys;
+export default Dom;
