@@ -1,2 +1,4 @@
 /vite-project/node_modules
 /node_modules
+
+cypress/screenshots/
