@@ -24,7 +24,7 @@ class TaskPopup {
     const div = document.createElement('div');
     div.innerHTML =
       `
-    <div class="flex flex-col min-w-[377px] bg-white p-6 rounded-2xl gap-y-4">
+    <div data-test-id="task-popup" class="flex flex-col min-w-[377px] bg-white p-6 rounded-2xl gap-y-4">
       <div class="flex flex-row justify-between">
         <span class="text-xl font-bold" data-id="title">${this.#title}</span>
         <button data-id="btnclose">

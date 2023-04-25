@@ -35,6 +35,7 @@ console.log("> tasks:", tasks);
 
 const taskOperations = {
   [Dom.Template.Task.BTN_DELETE]: (taskVO, domTask) => {
+    console.log("TRY TO DEL NODE")
     renderTaskPopup(
       taskVO,
       'Confirm delete task?',
@@ -77,16 +78,19 @@ domTaskColumn.onclick = (e) => {
   console.log('domTaskColumn', e.target);
   const domTaskElement = e.target;
   const taskBtn = domTaskElement.dataset.btn;
-
+  console.log('e')
+  console.log(e.target)
   const isNotTaskBtn = !taskBtn;
+  console.log(domTaskElement.dataset)
   if (isNotTaskBtn) return;
 
   const allowedButtons = [
     Dom.Template.Task.BTN_EDIT,
     Dom.Template.Task.BTN_DELETE,
   ];
+  console.log("if (!allowedButtons.includes(taskBtn)) return;")
   if (!allowedButtons.includes(taskBtn)) return;
-
+  console.log("AFTER if (!allowedButtons.includes(taskBtn)) return;")
   let taskId;
   let domTask = domTaskElement;
   do {
@@ -122,6 +126,9 @@ function renderTask(taskVO) {
   domTaskClone.dataset.id = taskVO.id;
   QUERY(domTaskClone, Dom.Template.Task.TITLE).innerText = taskVO.title;
   domTaskColumn.prepend(domTaskClone);
+  console.log("renderTask #2")
+  console.log(domTaskClone)
+
   return domTaskClone;
 }
 
