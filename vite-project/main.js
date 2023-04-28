@@ -2,6 +2,7 @@
 // import '@unocss/reset/tailwind.css';
 import { fromJSON } from "postcss";
 import Dom from "./src/const/DOM";
+import { delay } from "./src/const/utils/timeUntils";
 
 const KEY_LOCAL_TASKS = 'tasks';
 
@@ -28,6 +29,16 @@ domTemplateTask.removeAttribute('id');
 domTemplateTask.remove();
 
 const rawTasks = localStorage.getItem(KEY_LOCAL_TASKS);
+fetch('http://localhost:3000/tasks').them((response) => {
+  return response.ok && response.json();
+}).then((rawTasks) => {
+  if(rawTasks && rawTasks instanceof Object) {
+    console.log('json', rawTasks);
+    const serverTasks = rawTasks.map((json) => TaskVO.fromJSON(json));
+    serverTasks.forEach((taskVO) => renderTask(taskVO));
+    tasks.push(...serverTasks);
+  }
+});
 
 const tasks = rawTasks ? JSON.parse(rawTasks).map((json) => TaskVO.fromJSON(json)) : [];
 tasks.forEach((taskVO) => renderTask(taskVO));
@@ -139,6 +150,7 @@ async function renderTaskPopup(taskVO, popupTitle, ConfirmText, processDataCallb
   domPopupContainer.classList.remove('hidden');
 
   const onClosePopup = () => {
+    document.onkeyup = null;
     domPopupContainer.children[0].remove();
     domPopupContainer.append(domSpinner);
     domPopupContainer.classList.add('hidden');
@@ -156,19 +168,20 @@ async function renderTaskPopup(taskVO, popupTitle, ConfirmText, processDataCallb
   if(taskVO){
     taskPopupInstasce.TaskTitle= taskVO.title;
   }
-
-  setTimeout(() => {
-    domSpinner.remove();
-
-    document.onclick = (e) =>{
-      if(e.key === 'Escape'){
-        onClosePopup();
-      }
-    };
-    domPopupContainer.append(taskPopupInstasce.render());
-  }, 1000);
-
 };
+
+delay(1000).then(() => {
+  console.log('render 1');
+  domSpinner.remove();
+  document.onkeyup = (e) => {
+    if (e.key === 'Escape') {
+      onClosePopup();
+    }
+  };
+  domPopupContainer.append(taskPopupInstance.render());
+});
+
+console.log('render 0');
 
 function saveTask() {
   localStorage.setItem(KEY_LOCAL_TASKS, JSON.stringify(tasks));
