@@ -1,135 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700&display=swap');
-
-html{
-  font-size: 14px;
-  background-color: #f3eae3;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(21,21,23);
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.content{
-  max-width: 100%;
-  max-height: 100%;
+.main{
+max-width: 100%;
+max-height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.row {
   display: flex;
-  padding: 60px;
-  justify-content: center;
-  align-items: center; 
+  flex-direction: row;
+  align-items: center;
 }
 
 .card{
-  width: 600px;
-  height: 450px;
-  text-align: center;
-  background-color: #ffff;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 4%;
-  overflow: hidden;
-}
-
-.imageChange{
-  background-image: url("public/images/image-product-desktop.jpg");
-  background-size: cover;;
-}
-
-.productInformation{
-  padding: 2rem;
-  text-align: start;
-}
-
-.productInformation > h1{
- font-size: 14px;
- font-family: 'Montserrat', sans-serif;
- font-weight: 100;
- letter-spacing: 4px;
- color: rgba(0, 0, 0, 0.7);
-}
-
-.productInformation > h2 {
-  font-size: 30px;
-  font-family: 'Fraunces', serif;
-}
-
-.description{
-  font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
-  color: rgba(0, 0, 0, 0.7);
-}
-
-.containerPrice{
-  height: 40px;
-  margin: 30px 0 30px 0;
+  width: 365px;
+  height: 380px;
+  background-color: #212123;
+  color: white;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
+  flex-direction: column;
+  margin: 10px;
+  }
 
-.price{
-  font-size: 35px;
-  font-family: 'Fraunces', serif;
-  color: #3c8268;
-}
-
-.discountsPrice{
-  font-size: 15px;
-  padding: 2rem;
-  color: rgba(0, 0, 0, 0.7);
-}
-
-button{
-  width: 235px;
-  height: 45px;
-  background-color: #3c8268;
-  border-radius: 6px;
-  color: #ffff;
-  font-size: 15px;
+.titleBlock{
   display: flex;
-  flex-flow: row nowrap;
+  justify-content: space-between;
   align-items: center;
+  padding: 2rem;
+}
+
+.iconLogo{
+  width: 55px;
+  height: 55px;
+  border-radius: 5%;
+  display: flex;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
-  border: none;
+  align-items: center;
+}
+.icons{
+  width: 40px;
+  height: 40px;
 }
 
-@media screen and (max-width: 375px){
+.titleBlock{
+  font-size: 10px;
+}
 
-  .content{
-    display: block;
-    padding: 0; 
-  }
+.infoBlock{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  .card{
-    width: 340px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 2%;
-    overflow: hidden;
-  }
+.infoText{
+  width: 220px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: space-between;
+  padding: 0 0 2rem 2rem;
+  z-index: 2;
+}
 
-  .imageChange{
-    background-image: url("public/images/image-product-mobile.jpg");
-    background-size: 340px;
-    width: 340px;
-    height: 240px;  
-  }
+.infoText>h1{
+  font-size: 18px;
+  margin-bottom: 0.2rem;
+}
 
-  .productInformation{
-    padding: 1rem;
-  }
-  
-  .productInformation > h1{
-    font-size: 12px;
-  }
-  
-  .productInformation > h2 {
-    font-size: 30px;
-  }
+.infoText>h2{
+  font-size: 10px;
+  margin-bottom: 0.5rem;
+}
 
-  .price{
-    font-size: 30px;
-  }
-  
-  button{
-    width: 300px;
-  }
+.infoText>p{
+  font-size: 13px;
+  margin-top: 3rem;
+}
+
+.image{
+ width: 140px;
+ height: 261px;
 }
