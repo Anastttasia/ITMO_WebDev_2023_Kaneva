@@ -40,7 +40,7 @@ async function main() {
     domTaskColumn.innerHTML = '';
     tasks.forEach((taskVo) => renderTask(taskVo));
   });
-  tasksController.retrieveTasks();
+  taskController.retrieveTasks();
 
   const taskOperations = {
     [Dom.Button.CREATE_TASK]: () => {
@@ -152,7 +152,6 @@ async function main() {
     if (taskVO) {
       taskPopupInstasce.TaskTitle = taskVO.title;
     }
-  };
 
   delay(1000).then(() => {
     console.log('render 1');
@@ -162,11 +161,12 @@ async function main() {
         onClosePopup();
       }
     };
-    domPopupContainer.append(taskPopupInstance.render());
+    domPopupContainer.append(taskPopupInstasce.render());
   });
 
   console.log('render 0');
-
+  }
+  
   function saveTask() {
     localStorage.setItem(KEY_LOCAL_TASKS, JSON.stringify(tasks));
   }
