@@ -6,6 +6,8 @@ import { delay } from "./src/const/utils/timeUntils";
 import TasksModel from "./src/mvc/model/TaskModel";
 import TaskVO from "./src/mvc/model/vo/TaskVO";
 import TasksController from "./src/mvc/controller/TasksController";
+import 'toastify-js/src/toastify.css';
+import Toastify from "toastify-js";
 
 const KEY_LOCAL_TASKS = 'tasks';
 
@@ -34,24 +36,44 @@ function renderTask(taskVO) {
   return domTaskClone;
 }
 
+const showToastWithText = (text) =>
+  Toastify({
+    text,
+    duration: 3000,
+    close: true,
+  }).showToast();
+
 async function main() {
   tasksModel.addUpdateCallback((tasks) => {
     console.log('> addUpdateCallback', tasks);
     domTaskColumn.innerHTML = '';
-    tasks.forEach((taskVo) => renderTask(taskVo));
+    tasks.forEach((taskVO) => renderTask(taskVO));
   });
-  taskController.retrieveTasks();
+  taskController
+    .retrieveTasks()
+    .then(() => { })
+    .catch((e) => { });
 
   const taskOperations = {
     [Dom.Button.CREATE_TASK]: () => {
       renderTaskPopup(null, 'Create task', 'Create',
         (taskTitle, taskDate, taskTags) => {
           console.log('> Create task -> On Confirm');
-          taskController.createTask(taskTitle, taskDate, taskTags);
+          taskController
+            .createTask(taskTitle, taskDate, taskTags)
+            .then((taskVO) => {
+              console.log('> Create task -> On Confirm: Success');
+              showToastWithText(`You task saved: ${taskVO.title}`);
+            })
+            .catch((error) => {
+              console.log('> Create task -> On Confirm: Error =', error);
+              window.alert(`Error on server: ${error.toString()}`);
+            });
         }
       );
     },
-    [Dom.Template.Task.BTN_DELETE]: (taskVO, domTask) => {
+    [Dom.Template.Task.BTN_DELETE]: (taskId) => {
+      const taskVO = tasksModel.getTaskById(taskId);
       renderTaskPopup(
         taskVO,
         'Confirm delete task?',
@@ -62,10 +84,12 @@ async function main() {
             taskDate,
             taskTag,
           });
-          const indexOfTask = tasks.indexOf(taskVO);
-          tasks.splice(indexOfTask)
-          domTaskColumn.removeChild(domTask);
-          saveTask();
+          taskController
+            .deleteTask(taskId)
+            .then(() => {
+              showToastWithText(`Task deleted: ${taskVO.title}`);
+            })
+            .catch((e) => { });
         }
       );
     },
@@ -114,17 +138,12 @@ async function main() {
       taskId = domTask.dataset.id;
     } while (!taskId);
 
-    const taskVO = tasks.find((task) => task.id === taskId);
-    console.log('> taskVO:', taskVO);
-
     const taskOperation = taskOperations[taskBtn];
-    if (taskOperation) {
-      taskOperation(taskVO, domTask);
-    }
+    if (taskOperation) taskOperation(taskId);
   };
 
-  getDOM(Dom.Button.CREATE_TASK).addEventListener('click',
-    (e) => taskOperations[Dom.Button.CREATE_TASK]()
+  getDOM(Dom.Button.CREATE_TASK).addEventListener('click', (e) =>
+    taskOperations[Dom.Button.CREATE_TASK]()
   );
 
   async function renderTaskPopup(taskVO, popupTitle, ConfirmText, processDataCallback) {
@@ -153,20 +172,20 @@ async function main() {
       taskPopupInstasce.TaskTitle = taskVO.title;
     }
 
-  delay(1000).then(() => {
-    console.log('render 1');
-    domSpinner.remove();
-    document.onkeyup = (e) => {
-      if (e.key === 'Escape') {
-        onClosePopup();
-      }
-    };
-    domPopupContainer.append(taskPopupInstasce.render());
-  });
+    delay(1000).then(() => {
+      console.log('render 1');
+      domSpinner.remove();
+      document.onkeyup = (e) => {
+        if (e.key === 'Escape') {
+          onClosePopup();
+        }
+      };
+      domPopupContainer.append(taskPopupInstasce.render());
+    });
 
-  console.log('render 0');
+    console.log('render 0');
   }
-  
+
   function saveTask() {
     localStorage.setItem(KEY_LOCAL_TASKS, JSON.stringify(tasks));
   }
