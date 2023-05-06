@@ -6,70 +6,45 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-  </style>
-
+  <title>Calculator</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+  <div class="calcultor">
+    <div class="calScreen">
+      <p>0</p>
+    </div>
+    <div class="btns">
 
-  <div id="app">
-    <div style="margin-bottom: 1rem">
-      <h2 class="text-blue-500 text-xl pb-5">Calculator</h2>
-      <span>Number 1:</span>
-      <input class="border-2 border-blue-200" id="firstNumber" />
+      <div class="row">
+        <div class="button seven">7</div>
+        <div class="button eight">8</div>
+        <div class="button nine">9</div>
+        <div class="button Myltiply bgOrnge">X</div>
+      </div>
+      <div class="row">
+        <div class="button for">4</div>
+        <div class="button five">5</div>
+        <div class="button six">6</div>
+        <div class="button Plus bgOrnge">+</div>
+
+      </div>
+      <div class="row">
+        <div class="button one">1</div>
+        <div class="button two">2</div>
+        <div class="button there">3</div>
+        <div class="button Min bgOrnge">-</div>
+      </div>
+      <div class="row">
+        <div class="button zero">0</div>
+        <div class="button Ac bdGray">ac</div>
+        <div class="button Res bdGray">=</div>
+        <div class="button Division bgOrnge">/</div>
+      </div>
     </div>
-    <div style="margin-bottom: 1rem">
-      <span>Number 2:</span>
-      <input class="border-2 border-blue-200" id="inpSurname" />
-    </div>
-    <div class="flex flex-row text-3xl gap-x-5 pl-20">
-      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="sum(this)">+</button>
-      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="min(this)">-</button>
-      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="proiz(this)">*</button>
-      <button class="w-[30px] bg-blue-200 text-center rounded-lg" onclick="del(this)">:</button>
-    </div>
-    Result:
-    <div id="conResult"></div>
   </div>
-  <script>
-
-    let a = document.getElementById("firstNumber").value;
-    a = parseInt(a);
-    let b = document.getElementById("inpSurname").value;
-    b = parseInt(b);
-    let result;
-
-    function getResult(a, b, result) {
-      document.getElementById("conResult").innerHTML = result;
-    }
-
-    function sum(a, b, result) {
-      result = a + b;
-      getResult(result);
-    }
-
-    function min(a, b, result) {
-      result = a - b;
-      getResult(result);
-    }
-
-    function proiz(a, b, result) {
-      result = a * b;
-      getResult(result);
-    }
-
-    function del(a, b, result) {
-      result = a / b;
-      getResult(result);
-    }
-  </script>
+  <script src="./main.js"></script>
 </body>
 
 </html>
