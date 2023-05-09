@@ -1,29 +1,17 @@
 {
   "tasks": [
     {
-      "title": "title",
-      "date": "date",
-      "tags": [
-        "web"
-      ],
-      "id": 1
-    },
-    {
       "title": "Let's GO!",
       "date": 1683128729685,
       "tags": "Web",
       "id": 25
     },
     {
-      "title": "READ",
-      "date": 1683203404035,
-      "tags": "Web",
+      "title": "COOL!",
       "id": 26
     },
     {
-      "title": "HI!",
-      "date": 1683203413755,
-      "tags": "Web",
+      "title": "HELLO!",
       "id": 27
     }
   ],

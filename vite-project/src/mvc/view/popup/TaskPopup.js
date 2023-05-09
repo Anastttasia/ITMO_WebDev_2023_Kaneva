@@ -1,5 +1,3 @@
-
-
 class TaskPopup {
   #title;
   #tags;
@@ -16,7 +14,7 @@ class TaskPopup {
 
   #taskTitle = '';
 
-  set taskTitle(value){
+  set taskTitle(value) {
     this.#taskTitle = value;
   }
 
@@ -73,9 +71,9 @@ class TaskPopup {
 
     const popup = div.children[0];
 
-    const domBtnClose = popup.querySelector(`[data-id="btnclose"]`);
-    const domBtnConfirm = popup.querySelector(`[data-id="btnConfirm"]`);
-    const domInpTitle = popup.querySelector(`[data-id="inpTitle"]`);
+    const domBtnClose = popup.querySelector('[data-id="btnclose"]');
+    const domBtnConfirm = popup.querySelector('[data-id="btnConfirm"]');
+    const domInpTitle = popup.querySelector('[data-id="inpTitle"]');
 
     domBtnClose.onclick = () => {
       domBtnClose.onclick = null;

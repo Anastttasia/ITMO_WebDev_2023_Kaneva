@@ -3,14 +3,16 @@ import TaskVO from '../model/vo/TaskVO.js';
 
 class TasksController {
   #model;
-  constructor(model) {
+  #networkService;
+  constructor(model, networkService) {
     this.#model = model;
+    this.#networkService = networkService;
   }
 
   async retrieveTasks() {
     try {
-      this.#model.tasks = await fetch('http://localhost:3000/tasks')
-        .then((response) => response.ok && response.json())
+      this.#model.tasks = await this.#networkService
+        .retrieveFromPath('tasks')
         .then((rawTasks) => {
           if (rawTasks && rawTasks instanceof Array) {
             console.log('json', rawTasks);
@@ -45,12 +47,11 @@ class TasksController {
         console.error('> TaskController -> deleteTask: error =', e);
         throw new Error(e.toString());
       });
-
   }
 
   createTask(taskTitle, taskDate, taskTags) {
     console.log('> TaskController -> createTask');
-    return fetch('http://localhost:3000/tasks', {
+    return fetch(`http://localhost:3000/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,6 +72,28 @@ class TasksController {
       })
       .catch((e) => {
         console.log('> TasksController -> createTask:error =', e);
+        throw new Error(e.toString());
+      });
+  }
+
+  updateTaskById(taskId, taskTitle, taskDate, taskTag,) {
+    console.log('> TaskController -> updateTask: taskId =', taskId);
+    return fetch(`http://localhost:3000/tasks/${taskId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: taskTitle,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('> TasksController -> updateTask: data =', data)
+        this.#model.updateTaskById(taskId, data);
+      })
+      .catch((e) => {
+        console.log('> TasksController -> updateTask: error =', e);
         throw new Error(e.toString());
       });
   }
