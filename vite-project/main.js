@@ -57,5 +57,4 @@ const render = () => {
   }
   window.requestAnimationFrame(render);
 };
-
 window.requestAnimationFrame(render);
