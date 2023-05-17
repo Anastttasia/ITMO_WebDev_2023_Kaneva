@@ -46,12 +46,91 @@
   </div>
   </div>
   <div class="container flex flex-row w-full h-full bg-gray-200 rounded-3xl p-4">
-    <aside class="flex flex-col min-w-[120px]">
+    <aside class="flex flex-col w-1/4">
       <div class="flex flex-row items-center gap-x-2 py-4">
         <i class="iconify-inline text-teal-700 text-3xl" data-icon="ph:cube-fill"></i>
         <span class="font-bold text-xl">Taski</span>
       </div>
+
+      <div class="flex flex-col  py-4 pr-4">
+
+        <div class="flex flex-row w-full h-[55px] items-center ">
+          <div>
+            <i class="iconify-inline hover: text-neutral-800 w-[55px] h-[55px] pr-2 "
+              data-icon="carbon:user-avatar-filled-alt"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-lg">Anastasia Kaneva</span>
+            <span class="text-neutral-500 text-sm ">Premium account</span>
+          </div>
+        </div>
+
+        <div class="text-neutral-500 py-4 pr-4">
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row">
+              <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2 "
+                data-icon="tabler:activity-heartbeat"></i>
+              <span>Activity</span>
+            </div>
+            <span class="bg-teal-600 text-white text-xs w-[30px] h-[20px] rounded-2xl text-center">3</span>
+          </div>
+
+          <div class="flex flex-row items-center">
+            <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2"
+              data-icon="iconamoon:profile-fill"></i>
+            <span>My Profile</span>
+          </div>
+        </div>
+        <hr />
+        <div class="border-solid border-[0.5px] border-neutral-300"></div>
+        <div>
+          <div class="flex flex-row justify-between py-5 items-center">
+            <span class="font-medium text-lg ">Pages</span>
+            <i class="iconify-inline hover: text-neutral-400 mr-5" data-icon="material-symbols:keyboard-arrow-up"></i>
+          </div>
+
+          <div class="flex flex-col ">
+            <div class="flex flex-row text-neutral-400 pb-1">
+              <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2"
+                data-icon="material-symbols:dashboard-outline-rounded"></i>
+              <span>Dashboard</span>
+            </div>
+
+            <div class="flex flex-row pb-1">
+              <i class="iconify-inline hover: text-teal-600 w-[25px] h-[25px] pr-2 "
+                data-icon="carbon:document-tasks"></i>
+              <span class="text-teal-600 font-medium">Tasks</span>
+            </div>
+
+            <div class="flex flex-row text-neutral-400 pb-1">
+              <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2"
+                data-icon="fluent:people-team-16-regular"></i>
+              <span>Teams</span>
+            </div>
+
+            <div class="flex flex-row text-neutral-400 pb-1">
+              <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2" data-icon="tabler:message"></i>
+              <span>Messages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-end h-full">
+        <div class="flex flex-col">
+          <div class="flex flex-row text-neutral-400 pb-1">
+            <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2"
+              data-icon="tabler:circle-letter-i"></i>
+            <span>Help Center</span>
+          </div>
+          <div class="flex flex-row text-neutral-400 pb-1">
+            <i class="iconify-inline hover: text-neutral-400 w-[25px] h-[25px] pr-2" data-icon="ic:sharp-log-out"></i>
+            <span>Log out</span>
+          </div>
+        </div>
+      </div>
     </aside>
+
 
     <main class="flex flex-col bg-gray-50 rounded-2xl w-full px-4 pt-2 pb-2 gap-y-4">
       <div class="flex flex-row justify-between items-center ">
@@ -98,8 +177,9 @@
         </div>
       </div>
       <hr />
+      
       <div class="flex flex-row justify-between gap-x-4">
-        <div class="flex flex-col h-full w-1/2 bg-gray-200 border-1 border-grey-300/50 rounded-xl p-2">
+        <div class="flex flex-col h-full w-1/3 bg-gray-200 border-1 border-grey-300/50 rounded-xl p-2">
           <div class="flex flex-row justify-between py-1 px-1">
             <div class="flex flex-row font-bold gap-x-1">
               <span>To Do</span>
@@ -111,7 +191,7 @@
             <div data-test-id="tasks-column" class="flex flex-col justify-start w-full gap-y-4 justify-between">
 
               <div id="tempalateTask"
-                class=" flex flex-row shadow rounded0lg px-3 py-3 bg-neutral-50 border-1 border-neutral-100">
+                class=" flex flex-row shadow rounded0lg px-3 py-3 bg-neutral-50 border-1 border-neutral-100 ">
                 <div class="flex flex-col w-full gap-y-3">
                   <span data-id="tempalateTaskTitle" class="font-bold pointer-events-none">Layout Design</span>
                   <div class="flex flex-row justify-between pointer-events-none">
@@ -136,10 +216,12 @@
                     </div>
                     <div class="flex flex-row gap-2">
                       <button data-btn="btnEdit">
-                        <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-xl pointer-events-none" data-icon="material-symbols:edit"></i>
+                        <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-xl pointer-events-none"
+                          data-icon="material-symbols:edit"></i>
                       </button>
                       <button data-btn="btnDelete">
-                        <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-xl pointer-events-none" data-icon="material-symbols:delete"></i>
+                        <i class="iconify-inline text-neutral-400 hover:text-neutral-800 text-xl pointer-events-none"
+                          data-icon="material-symbols:delete"></i>
                       </button>
                     </div>
                   </div>
@@ -150,6 +232,14 @@
               </button>
             </div>
           </div>
+        </div>
+
+        <div class=" flex flex-col h-full w-1/3 bg-gray-200 border-1 border-grey-300/50 rounded-xl p-2">
+          <span>In progress</span>
+        </div>
+
+        <div class="flex flex-col h-full w-1/3 bg-gray-200 border-1 border-grey-300/50 rounded-xl p-2">
+          <span>Ready</span>
         </div>
       </div>
     </main>
