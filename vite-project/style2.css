@@ -1,0 +1,15 @@
+.navBarMobile{
+  display: none;
+}
+
+.imageMobile{
+  display: none;
+}
+
+main{
+  display: grid;
+  /* Будет создано 3 колонки */
+  grid-template-columns: 1fr 1fr 1fr;
+  /* Будет создано 3 ряда */
+  grid-template-rows: 500px 175px 125px;
+}
