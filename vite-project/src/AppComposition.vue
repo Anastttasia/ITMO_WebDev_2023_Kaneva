@@ -1,20 +1,12 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import AppHeader from './components/AppHeader.vue';
 
-
-const PAGES = ['index', 'todos'];
-const user = ref({name: 'Anastasia'});
-const currentPage = ref(PAGES[0]);
-// const header = ref(null);
-
-const onChangePsge = (pageName) => {
-  console.log('> AppComposition -> onChangePsge');
-  currentPage.value = pageName;
-};
+const user = ref({ name: 'Vladimir' });
+const header = ref(null);
 
 onMounted(() => {
-  console.log('> AppComposition -> onMounted');
+  console.log('> App -> onMounted: header =', header);
 });
 </script>
 
