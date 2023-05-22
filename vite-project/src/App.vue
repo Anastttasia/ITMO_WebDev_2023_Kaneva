@@ -56,7 +56,7 @@ export default {
     if(rawTodos){
       this.todos = JSON.parse(rawTodos);
     }
-    this.inputText = JSON.parse(localStorage.getItem(LOCAL_KEY_INPUT_TEXT) || '');
+    this.inputText = JSON.parse(localStorage.getItem(LOCAL_KEY_INPUT_TEXT) || '""');
 
         // fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
     //     .then((response) => response.json())
@@ -80,8 +80,8 @@ export default {
   },
   methods: {
     onInputEnterKeyUp() {
-      console.log('> App -> onInputEnterKeyUp');
-      this.todos.push(this.inputText);
+      console.log('> App -> onInputEnterKeyUp', this.todoText);
+      this.todos.push(this.todoText);
       this.inputText = '';
     },
     onDeleteTodo(index) {
