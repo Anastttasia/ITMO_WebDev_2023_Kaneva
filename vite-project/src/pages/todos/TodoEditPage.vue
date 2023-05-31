@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import {useTodosStore} from '../../store/todosStore.js';
+import {useTodosStore} from '@/store/todosStore.js';
 
 const todoStore = useTodosStore();
 
@@ -36,14 +36,14 @@ const onTodoTextInput = ({ currentTarget }) => {
 
 onMounted(() => {
   console.log('> TodoEditPage -> onMounted: route.params.id -> ', route.params.id);
-  console.log('> TodoEditPage -> onMounted: todo -> ', todo);
+  console.log('> TodoEditPage -> onMounted: todos -> ', todo);
 });
 
 </script>
 <template>
   <div>
     <div>
-      Todo Edit Page: {{ route.params.id }}
+      Todo Edit Page: {{ route.params.id }})
     </div>
     <div>
       <label for="inpTodoEdit">Todo text</label>

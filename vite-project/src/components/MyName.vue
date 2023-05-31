@@ -2,27 +2,28 @@
   <h1>Enter you name</h1>
   <div>
     {{ firstName }}
-    <span style="">
+    <span style="color: red;">
       {{ lastName }}
     </span>
   </div>
   <small>
-    <span :class="{
-      'selected': !!status,
-      'unselected': !status
-    }"
+    <span
+      class="flex flex-col"
+      :class="{
+        'selected': !!status,
+        'unselected': !status
+      }"
     >
-    Status:</span>
+      Status:
+    </span>
     <span>{{ status }}</span>
     <div>
-      <button 
-      @click="onResetClick" 
-      :style="{
-        visibility: status ? 'visible' : 'hidden'
-      }"
-      >
-      Reset
-    </button>
+      <button
+        :style="{
+          visibility: status ? 'visible' : 'hidden'
+        }"
+        @click="onResetClick"
+      >Reset</button>
     </div>
   </small>
 </template>
@@ -30,11 +31,11 @@
 <script>
 export default {
   name: 'MyName',
-  props:{
-    status:{
+  props: { 
+    status: {
       type: String,
       default: '-'
-    }
+    },
   },
   emits: ['reset'],
   data: () => ({
@@ -42,20 +43,18 @@ export default {
     lastName: 'Kaneva'
   }),
   methods: {
-    onResetClick(){
+    onResetClick() {
       console.log('> MyName -> onResetClick');
       this.$emit('reset');
     }
   }
 };
 </script>
-
 <style scoped>
 .selected {
   color: green;
 }
-
-.unselected{
+.unselected {
   color: red;
 }
 </style>
