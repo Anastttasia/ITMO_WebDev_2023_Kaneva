@@ -1,376 +1,261 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap");
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+p {
+  line-height: 1.8;
+  color: hsl(236, 13%, 42%);
+}
+
+html {
+  font-size: 15px;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  padding: 5rem 10rem 5rem 13rem;
-}
-
-.navBarMobile {
-  display: none;
-}
-
-.buttonNavBar {
-  display: none;
-}
-
-.ulNavBarMobile {
-  display: none;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 4rem;
 }
 
 .header {
-  width: 1100px;
-  height: 40px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
-}
-
-.nav {
-  width: 35%;
-  display: flex;
   justify-content: space-between;
-  font-size: 15px;
+  padding: 1.25rem;
 }
 
-.navSlotHeader {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-.navSlotHeader:hover {
-  color: red;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.mainArticleBlock {
-  display: flex;
-  flex-direction: row;
-  max-width: 100%;
-}
-
-.leftBlock {
-  display: flex;
-  flex-direction: column;
-  width: 730px;
-  height: 500px;
-}
-
-.imageDesktop {
-  width: 730px;
-  height: 300px;
-}
-
-.imageMobile {
-  display: none;
-}
-
-.startPageText {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  display: flex;
-  align-items: flex-end;
-}
-
-.startPageText>h1 {
-  font-size: 45px;
-  color: #020120;
-  font-weight: 800;
-}
-
-.startPageTextBlock {
-  display: flex;
-  flex-direction: column;
-  padding-left: 6rem;
-}
-
-.text {
-  font-size: 15px;
-  color: rgba(2, 4, 29, 0.8);
-  text-align: start;
-  padding-bottom: 3rem;
-  line-height: 25px;
-}
-
-.button {
-  width: 185px;
-  height: 50px;
-  text-align: center;
-  color: white;
-  background-color: #f15d51;
+.header nav #menuClose {
+  background: transparent;
   border: none;
-  letter-spacing: 5px;
+  outline: none;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  z-index: 99999;
+  cursor: pointer;
 }
 
-.button:hover {
-  background-color: #00001a;
+.header nav {
+  opacity: 0;
+  z-index: -999;
+  transition: all 0.3s ease-in-out;
 }
 
-.rightblock {
-  padding-left: 1.5rem;
+.header nav.open {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 75vw;
+  background-color: white;
+  padding: 1.25rem;
+  opacity: 1;
+  z-index: 99999999999;
 }
 
-.blockNew {
-  width: 350px;
-  height: 500px;
-  background-color: #00001a;
-  color: white;
+.header nav ul {
+  position: absolute;
+  top: 15%;
+  transform: translateY(-50%);
+
+}
+
+.header nav ul li {
+  margin: 2rem 0 1rem 2rem;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.header nav ul li:hover {
+  color: hsl(5, 85%, 63%);
+}
+
+.header .menuButton button {
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.showcase {
+  padding: 1.25rem;
+  padding-top: 0;
+}
+
+.showcase h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: hsl(240, 100%, 5%);
+  margin: 1rem 0;
+}
+
+.showcase div:first-child article p {
+  margin-bottom: 1rem;
+}
+
+.showcase div:first-child article button {
+  background-color: hsl(5, 85%, 63%);
+  color: #fff;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.showcase div:first-child article button:hover {
+  background-color: hsl(240, 100%, 5%);
+  cursor: pointer;
+}
+
+.showcase>div:last-child {
+  background-color: hsl(240, 100%, 5%);
+  margin-top: 2rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.showcase>div:last-child h2 {
+  color: hsl(35, 77%, 62%);
+}
+
+.showcase>div:last-child article {
+  padding: 1.25rem 0;
+}
+
+.showcase>div:last-child article:not(:last-child) {
+  border-bottom: 1px solid hsl(236, 13%, 42%);
+}
+
+.showcase>div:last-child h3 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.showcase>div:last-child h3:hover {
+  color: hsl(35, 77%, 62%);
+  cursor: pointer;
+}
+
+.cards {
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2.5rem;
+}
+
+.cards article {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  gap: 1.25rem;
 }
 
-.blockNew>h1 {
-  color: #e6a851;
-  padding: 1rem 0 0 1rem;
+.cards article img {
+  width: 150px;
 }
 
-.newBlock {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(266, 266, 266, 0.3);
+.cards article span {
+  color: hsl(236, 13%, 42%);
+  font-weight: bold;
+  font-size: 2rem;
+  opacity: 75%;
 }
 
-.newBlock>h2 {
-  font-size: 18px;
-  padding: 1rem 0 1rem 0;
-  font-weight: 900;
+.cards article h4 {
+  font-size: 1.25rem;
+  color: hsl(240, 100%, 5%);
+  margin: 1rem 0;
 }
 
-.newBlock>p {
-  font-size: 14px;
-  color: rgba(266, 266, 266, 0.8);
-  line-height: 25px;
-  padding-bottom: 0.94rem;
-}
-
-.newsBlock {
-  display: flex;
-  flex-direction: row;
-  padding-top: 4rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: row;
-  padding-right: 1rem;
-  height: 125px;
-  width: 320px;
-}
-
-.cardInfo {
-  display: flex;
-  flex-direction: column;
-  padding-left: 2rem;
-  line-height: 25px;
-}
-
-.cardInfo>h2 {
-  font-size: 35px;
-  color: #c5c3ce;
-  padding-bottom: 1rem;
-}
-
-.cardInfo>h3 {
-  font-size: 15px;
-  font-weight: 900;
-  padding-bottom: 0.5rem;
-}
-
-.specialClass {
-  padding-left: 5rem;
-}
-
-.cardInfo>p {
-  font-size: 12px;
-  color: gray;
-}
-
-
-@media screen and (orientation: portrait) {
-
-  body {
-    padding: 0 1rem 0 1rem;
+@media (min-width: 768px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 2rem;
   }
+}
 
-  .bgMobileNavBar {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 3;
-    background-color: rgba(93, 95, 121, 0.7);
-  }
-
-  .navBarMobile {
-    position: fixed;
-    z-index: 5;
-    right: 0;
-    top: 0;
-    width: calc(100vw - 30%);
-    height: 100%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-    transition: all 1s;
-  }
-
-  .showNavBarMobile {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-
-  .buttonNavBar {
-    display: block;
-    border: none;
-    background: transparent;
-    background-color: transparent;
-  }
-
-  .buttonClose {
-    position: fixed;
-    top: 0;
-    right: 0;
-    margin: 2rem 2rem 0 0;
-  }
-
-  .ulNavBarMobile {
-    display: flex;
-    flex-direction: column;
-    padding: 5rem 0 0 1rem;
-  }
-
-  .navSlotHeader {
-    padding: 0.75rem;
-    color: #0c0912;
-  }
-
+@media (min-width: 1024px) {
   .header {
+    padding: 2rem 1.25rem;
+  }
+
+  .header nav {
+    opacity: 1;
+    z-index: auto;
     width: 100%;
-    height: 40px;
+  }
+
+  .header nav.open {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: auto;
+    background-color: transparent;
+    padding: 0;
+    z-index: auto;
+  }
+
+  .header nav #menuClose {
+    display: none;
+  }
+
+  .header nav ul {
+    position: relative;
+    top: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 20px 0 20px 0;
+    justify-content: flex-end;
+    gap: 2rem;
+    transform: translateY(0%);
   }
 
-  .nav {
-    display: none;
-  }
-
-  main {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .imageDesktop {
-    display: none;
-  }
-
-  .imageMobile {
-    display: block;
-    max-width: 100%;
-    height: 300px;
-  }
-
-  .mainArticleBlock {
-    flex-direction: column;
-  }
-
-  .leftBlock {
-    max-width: 370px;
-    max-height: 100%;
-    padding-bottom: 13rem;
-  }
-
-  .startPageText {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .startPageText>h1 {
-    padding-top: 1rem;
-    line-height: 45px;
+  .header nav ul li {
     margin: 0;
   }
 
-  .startPageTextBlock {
-    padding-left: 0;
+  .header .menuButton button {
+    display: none;
   }
 
-  .text {
-    padding-bottom: 2rem;
-    padding-top: 1rem;
-    margin: 0;
-  }
-
-  .mainArticleBlockRight {
-    padding-left: 1rem;
-    width: 375px;
-    max-height: 100%;
-  }
-
-  .rightblock {
-    padding-left: 0;
-  }
-
-  .blockNew {
-    height: 490px;
-    width: 342px;
-  }
-
-  .newBlock {
-    padding: 1rem;
-    border-bottom: 1px solid rgba(266, 266, 266, 0.3);
-  }
-
-  .newBlock>p {
-    line-height: 20px;
-  }
-
-  .newsBlock {
-    flex-direction: column;
-    padding-top: 0;
-    padding: 3rem 0 3rem 0;
-  }
-
-  .card {
+  .showcase {
     display: flex;
-    flex-direction: row;
-    padding-right: 0;
-    padding: 1rem 0 1rem 0;
-    height: 130px;
-    width: 340px;
+    gap: 2rem;
   }
 
-  .imgCard {
-    width: 100px;
-    height: 130px;
+  .showcase h1 {
+    font-size: 3rem;
   }
 
-  .cardInfo {
-    padding-left: 1rem;
+  .showcase>div:first-child article {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    place-items: center;
+    margin-top: 2rem;
   }
 
-  .cardInfo>h2 {
-    font-size: 30px;
+  .showcase>div:last-child {
+    margin-top: 0;
   }
 
-  .specialClass {
-    padding-left: 0;
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
