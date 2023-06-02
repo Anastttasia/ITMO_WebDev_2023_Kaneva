@@ -7,16 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invoice</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* @tailwind base;
-    @tailwind components;
-    @tailwind utilities; */
-  </style>
 </head>
 
-<body>
-  <div class="p-16">
-    <div class="flex flex-row">
+<body class="bg-gray-200">
+  <div class="m-16 p-12 flex flex-col bg-white">
+    <header class="flex flex-row mb-20">
 
       <div class="flex flex-row basis-1/2 text-3xl">
         <p class="text-gray-600 mr-3">№</p>
@@ -58,7 +53,79 @@
           </div>
         </div>
       </div>
-    </div>
+    </header>
+    <main class="flex flex-col">
+      <div class="flex flex-row font-bold text-gray-600 border-b-2 border-gray-400">
+        <div class="basis-1/2">
+          <span>Item</span>
+        </div>
+        <div class="basis-1/2 flex flex-row">
+          <div class="basis-1/2 flex flex-row">
+            <span class="mr-28">Qty</span>
+            <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
+          </div>
+          <div class="basis-1/2 flex flex-row justify-end">
+            <span class="flex flex-row">Total <p class="text-gray-400">($)</p></span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-14">
+        <button class="bg-gray-200 text-lg font-bold rounded-full w-8 h-8 hover:bg-gray-400">+</button>
+      </div>
+      <div class="flex justify-end mt-40 ">
+        <div class="flex flex-col basis-1/2 border-t-2 border-black">
+          <div class="flex justify-between flex-row mt-2">
+            <span>Subtotal</span>
+            <span>0</span>
+          </div>
+          <div class="flex justify-between flex-row mt-2">
+            <label class="flex flex-row">Discount (
+              <input type="text" value="0"
+                class="w-4 text-lg border-b-2 border-gray-200 text-gray-400 focus:outline-none">
+              <p>%</p>)
+              <span class="text-gray-400 text-xs ml-2">floor</span>
+            </label>
+            <span>0</span>
+          </div>
+          <div class="flex justify-between flex-row mt-2">
+            <label class="flex flex-row">Taxes (
+              <input type="text" value="0"
+                class="w-4 text-lg border-b-2 border-gray-200 text-gray-400 focus:outline-none">
+              <p>%</p>)
+              <span class="text-gray-400 text-xs ml-2">ceil</span>
+            </label>
+            <span>0</span>
+          </div>
+          <div class="mt-14 border-t-2 border-black">
+            <div class="flex justify-between flex-row mt-2">
+              <span class="font-bold">Total</span>
+              <span>0 <span class="text-gray-400">$</span> </span>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+    <footer class="flex justify-end mt-40">
+      <div class="flex flex-col basis-1/2">
+        <h2 class="font-bold mb-4">IBAN</h2>
+        <span>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat.
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur.
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+          deserunt mollit anim id est laborum.
+        </span>
+        <p class="font-medium mt-4">
+          Thank you,
+        </p>
+        <p class="font-medium">
+          Your name
+        </p>
+      </div>
+
+    </footer>
   </div>
 </body>
 
