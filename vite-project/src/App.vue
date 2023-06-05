@@ -23,6 +23,7 @@ const checkRouteIsNotCurrent = (routePath) => useRoute().path !== routePath;
 const menuLinks = reactive([
   { name: 'Index', link: ROUTES.INDEX, canRender: computed(() => checkRouteIsNotCurrent(ROUTES.INDEX)) },
   { name: 'Todos', link: ROUTES.TODOS, canRender: computed(() => hasUser.value && checkRouteIsNotCurrent(ROUTES.TODOS)) },
+  { name: 'Books', link: ROUTES.BOOKS, canRender: computed(() => hasUser.value && checkRouteIsNotCurrent(ROUTES.BOOKS)) },
   { name: 'Sign In', link: ROUTES.SIGNIN, canRender: computed(() => !hasUser.value && checkRouteIsNotCurrent(ROUTES.SIGNIN)) },
   { name: 'Sign Out', link: ROUTES.INDEX, canRender: computed(() => hasUser.value), onClick: () => {
     console.log('SignOUT');

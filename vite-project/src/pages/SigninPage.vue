@@ -1,54 +1,33 @@
 <script setup>
-import {inject, ref} from 'vue';
-
+import RegistrationForm from '@/components/RegistrationForm.vue';
 import ROUTES from '@/constants/routes.js';
 import PROVIDE from '@/constants/provides.js';
+import { inject, ref } from 'vue';
 
-import RegistrationForm from '@/components/RegistrationForm.vue';
-import {useRouter} from 'vue-router';
-
-const router = useRouter();
 const pb = inject(PROVIDE.PB);
-const errors = ref([]);
+const isSucces = ref(false);
 
-const onRegister = (dto) => {
-  errors.value = [];
-  console.log('> SignUpPage - onRegister:', dto);
-  if (!dto.password || dto.password.length === 0) {
-    errors.value = ['Password required'];
-  } else {
-    pb.collection('users').create({
-      username: dto.username,
-      password: dto.password,
-      passwordConfirm: dto.password,
-    }).then((record) => {
-      pb.authStore.save(record.id, record);
-      console.log('> SignUpPage - onRegister: result = ', record);
-      if (window.confirm(`User created with ID: ${record.id}`)) {
-        router.replace({ path: ROUTES.INDEX });
-      }
-    }).catch((error) => {
-      console.log('> SignUpPage - onRegister: error = ', error);
-      const errorData = error.data.data;
-      for (const item in errorData) {
-        const data = errorData[item];
-        console.log('> item', data);
-        errors.value.push(data.message);
-      }
-    });
-  }
+const onLogin = (dto) => {
+  pb.collection('users').authWithPassword(
+    dto.username,
+    dto.password
+  ).then(() =>{
+    isSucces.value = true;
+  });
 };
 
 </script>
 <template>
-  <div>
-    <RegistrationForm
-      :registration="true"
-      :errors="errors"
-      @register="onRegister"
-    />
-    <router-link :to="ROUTES.SIGNIN">
-      Sign In
+  <div v-if="!isSucces">
+    <RegistrationForm @login="onLogin"/>
+    <router-link :to="ROUTES.SIGNUP">
+      Sign Up
+    </router-link>
+  </div>
+  <div v-else>
+    <div>You have been successfully logged in</div>
+    <router-link :to="ROUTES.INDEX">
+      Home
     </router-link>
   </div>
 </template>

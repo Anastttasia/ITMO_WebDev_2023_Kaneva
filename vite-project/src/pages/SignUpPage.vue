@@ -28,12 +28,16 @@ const onRegister = (dto) => {
         router.replace({ path: ROUTES.INDEX });
       }
     }).catch((error) => {
-      console.log('> SignUpPage - onRegister: error = ', error);
       const errorData = error.data.data;
-      for (const item in errorData) {
-        const data = errorData[item];
-        console.log('> item', data);
-        errors.value.push(data.message);
+      console.log('> SignUpPage - onRegister: error = ', { error, errorData });
+      if (errorData) {
+        for (const item in errorData) {
+          const data = errorData[item];
+          console.log('> item', data);
+          errors.value.push(data.message);
+        }
+      } else{
+        errors.value.push(error.message);
       }
     });
   }
