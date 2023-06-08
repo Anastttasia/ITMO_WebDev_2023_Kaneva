@@ -9,10 +9,11 @@ import router from './router.js';
 import AppComposition from './App.vue';
 import PROVIDE from '@/constants/provides.js';
 
-console.log(import.meta.env.VITE_SERVER_PATH);
-
 const pb = new PocketBase('http://localhost:8090');
 console.log('pb.authStore.isValid:', pb.authStore.isValid);
+
+let db = new PouchDB('kittens');
+console.log(db);
 
 createApp(AppComposition)
   .use(createPinia().use(piniaPluginPersistedState))
