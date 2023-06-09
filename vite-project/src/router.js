@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
 function checkNavigation(routes, path, gotRoute, next, isPathIncluded = false){
   const pathIndex = routes.indexOf(path);
   const notAllowedNavigation = isPathIncluded ? pathIndex < -1 : pathIndex < 0;
-    console.log('> router -> beforeEach', to.path, { notAllowedNavigation });
+    console.log('> router -> beforeEach', path, { notAllowedNavigation });
   if (notAllowedNavigation) {
     next(gotRoute);
   } else next();
