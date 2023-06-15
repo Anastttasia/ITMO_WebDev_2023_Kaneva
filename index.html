@@ -1,12 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" href="style2.css">
+  <script>
+    function openNavBar() {
+      let bgMobileNavBar = document.getElementById('bgMobileNavBar');
+      bgMobileNavBar.classList.add('bgMobileNavBar');
+      let navBarMobileBlock = document.getElementById('mobileNavBar');
+      navBarMobileBlock.classList.add('showNavBarMobile');
+      let openModalBlock = document.getElementById('openModal');
+      console.log(openModalBlock.style.display)
+      openModalBlock.style.display = 'none';
+    }
+    function closeNavBar() {
+      let bgMobileNavBar = document.getElementById('bgMobileNavBar');
+      bgMobileNavBar.classList.remove('bgMobileNavBar');
+      let navBarMobileBlock = document.getElementById('mobileNavBar');
+      navBarMobileBlock.classList.remove('showNavBarMobile');
+      navBarMobileBlock.classList.add('closeMobileNavBar');
+      let openModalBlock = document.getElementById('openModal');
+      openModalBlock.style.display = '';
+    }
+  </script>
+  <style>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+  </style>
 </head>
+
 <body>
-  
+
+  <div id="bgMobileNavBar"></div>
+  <div id="mobileNavBar" class="navBarMobile">
+    <button class="buttonNavBar buttonClose" type="submit" onclick="closeNavBar()">
+      <svg width="32" height="31" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#00001A" fill-rule="evenodd">
+          <path d="m2.919.297 28.284 28.284-2.122 2.122L.797 2.419z" />
+          <path d="M.797 28.581 29.081.297l2.122 2.122L2.919 30.703z" />
+        </g>
+      </svg>
+    </button>
+    <div class="ulNavBarMobile">
+      <span class="navSlotHeader">Home</span>
+      <span class="navSlotHeader">New</span>
+      <span class="navSlotHeader">Popular</span>
+      <span class="navSlotHeader">Trending</span>
+      <span class="navSlotHeader">Categories</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <div>
+      <img src="assets/images/logo.svg">
+    </div>
+
+    <button id="openModal" class="buttonNavBar" type="submit" onclick="openNavBar()">
+      <svg width="40" height="17" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#00001A" fill-rule="evenodd">
+          <path d="M0 0h40v3H0zM0 7h40v3H0zM0 14h40v3H0z" />
+          <path d="M0 0h40v3H0z" />
+        </g>
+      </svg>
+    </button>
+
+    <nav class="nav">
+      <span class="navSlotHeader">Home</span>
+      <span class="navSlotHeader">New</span>
+      <span class="navSlotHeader">Popular</span>
+      <span class="navSlotHeader">Trending</span>
+      <span class="navSlotHeader">Categories</span>
+    </nav>
+  </header>
+
+  <main>
+    <div class="box1 order-1">
+      <img class="imageDesktop" src="assets/images/image-web-3-desktop.jpg">
+    </div>
+
+    <div class="box2 order-2 max-md:order-4">
+      <div class="blockNew">
+        <h1>New</h1>
+        <div class="newBlock">
+          <h2>Hydrogen VS Elecric Cars</h2>
+          <p>Will hydrogen-fueled cars ever catch up to EVs?</p>
+        </div>
+
+        <div class="newBlock">
+          <h2>The Downsides of Al Artistey</h2>
+          <p>What are the possible adverse effects
+            of on-demand Ai image generation?</p>
+        </div>
+
+        <div class="newBlock">
+          <h2>Is VC Funding Drying Up?</h2>
+          <p>Private funding is down 50% YOY.
+            We take a look at what that means.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box3 order-3 max-md:order-2">
+      <h1>The Bright Future of Web 3.0?</h1>
+    </div>
+
+    <div class="box4 order-4 max-md:order-3">
+      <div>
+        <p class="text">We dive into the next evolution of the webn
+          that claims to put the power of the platforms
+          back into the hands of the people.
+          But is it really fulfilling its promise?
+        </p>
+      </div>
+      <div>
+        <button class="button">READ MORE</button>
+      </div>
+    </div>
+
+    <div class="box5 order-5">
+      <div class="card">
+        <img class="imgCard" src="assets/images/image-retro-pcs.jpg">
+        <div class="cardInfo">
+          <h2>01</h2>
+          <h3>Reviving Retro PCs</h3>
+          <p>What happenes when old PCs are
+            given modern upgrades?</p>
+        </div>
+      </div>
+    </div>
+    <div class="box6 order-6">
+      <div class="card">
+        <img class="imgCard" src="assets/images/image-top-laptops.jpg">
+        <div class="cardInfo">
+          <h2>02</h2>
+          <h3>Top 10 Laptops of 2022</h3>
+          <p>Our best picks for various needs and budgets.</p>
+        </div>
+      </div>
+    </div>
+    <div class="box7 order-7">
+      <div class="card">
+        <img class="imgCard" src="assets/images/image-gaming-growth.jpg">
+        <div class="cardInfo">
+          <h2>03</h2>
+          <h3>The Growth of Gaming</h3>
+          <p>How the pandemic has sparked fresh opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="h-[10rem] text-center p-14 text-xs">
+    <p>Anastasia Kaneva</p>
+    <p>2023</p>
+  </footer>
 </body>
+
 </html>
