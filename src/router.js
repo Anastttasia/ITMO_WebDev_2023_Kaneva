@@ -37,11 +37,10 @@ router.beforeEach((to, from, next) => {
   const pb = inject(PROVIDE.PB);
   console.log('pb.authStore', pb.authStore);
   const userLoggedIn = pb.authStore.model?.id;
-  if(userLoggedIn){
-    checkNavigation([ROUTES.SIGNIN], to.path, from, next, true);
-  } else {
-    checkNavigation([PUBLIC_PAGES], to.path, { path: ROUTES.SIGNIN }, next);
-  }
+  console.log('userLoggedIn', userLoggedIn);
+  const routes = userLoggedIn ? [ROUTES.SIGNIN] : PUBLIC_PAGES;
+  const gotoRoute = userLoggedIn ? from : { path: ROUTES.SIGNIN };
+  checkNavigation(routes, to.path, gotoRoute, next, userLoggedIn);
 });
 
 function checkNavigation(routes, path, gotRoute, next, isPathIncluded = false){

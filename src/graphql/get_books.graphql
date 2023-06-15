@@ -1,0 +1,11 @@
+query GetBooks {
+    book {
+        year
+        title
+        pages
+        id
+        author{
+          name
+        }
+    }
+}

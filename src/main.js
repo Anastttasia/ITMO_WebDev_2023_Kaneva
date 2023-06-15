@@ -3,7 +3,8 @@ import {createApp} from 'vue';
 import {createPinia} from 'pinia';
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate';
 import PocketBase from 'pocketbase';
-
+import { DefaultApolloClient } from '@vue/apollo-composable';
+import apolloClient from './apollo';
 import router from './router.js';
 
 import AppComposition from './App.vue';
@@ -41,5 +42,6 @@ createApp(AppComposition)
   .use(createPinia().use(piniaPluginPersistedState))
   .provide(PROVIDE.PB, pb)
   .provide(PROVIDE.DB, db)
+  .provide(DefaultApolloClient, apolloClient)
   .use(router)
   .mount('#app');

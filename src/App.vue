@@ -2,11 +2,11 @@
 import {computed, inject, onMounted, reactive, ref} from 'vue';
 import AppHeader from '@/components/AppHeader.vue';
 import AppMenu from '@/components/AppMenu.vue';
-import {storeToRefs} from 'pinia';
-import {useUserStore} from '@/store/userStore.js';
 import PROVIDE from '@/constants/provides.js';
 import ROUTES from '@/constants/routes.js';
 import {useRoute} from 'vue-router';
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 
 const pb = inject(PROVIDE.PB);
 const user = ref(pb.authStore.model);
@@ -19,6 +19,15 @@ const hasUser = computed(() => !!user.value);
 // pb.authStore.clear();
 
 const checkRouteIsNotCurrent = (routePath) => useRoute().path !== routePath;
+
+const { result: usersData, loading: isUserLoading } = useQuery(gql`
+  query getUsers {
+    user {
+      id
+      name
+    }
+  }
+`);
 
 const menuLinks = reactive([
   { name: 'Index', link: ROUTES.INDEX, canRender: computed(() => checkRouteIsNotCurrent(ROUTES.INDEX)) },
@@ -35,6 +44,12 @@ const menuLinks = reactive([
 <template>
   <AppHeader>
     Todo App
+    <div v-if="isUserLoading">
+      Users Loading
+    </div>
+    <div v-else>
+      Find users: {{ usersData.user }}
+    </div>
     <template #sub-header>
       <span v-if="hasUser">created by {{ user.username }}</span>
       <span v-else>noname</span>
