@@ -5,49 +5,56 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Invoice</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-200">
-  <div class="backdrop-opacity-20 backdrop-invert bg-black/30 w-full h-full absolute top-0 z-10">
-    <div class="bg-white h-[25rem] z-20 m-16 mt-0 p-12">
-      <div class="flex flex-row justify-between">
-        <button class="text-gray-400">Delete</button>
-        <button class="text-gray-400 hover:text-black">close</button>
-      </div>
+  <div id="modalWindow" class="noneModalWindow">
+    <div id="bgModalWindow" class="backdrop-opacity-20 backdrop-invert bg-black/30 w-full h-full absolute top-0 z-20">
+      <div id="contentModalWindow" class="bg-white h-[25rem] z-30 m-16 mt-0 p-12">
+        <div class="flex flex-row justify-between">
+          <button class="text-gray-400">Delete</button>
+          <button id="closeModalWindow" class="text-gray-400 hover:text-black">close</button>
+        </div>
 
-      <div class="flex flex-row justify-between items-end font-bold mt-6">
-        <div class="text-4xl "><h1>Add</h1></div>
-        <div>
-          <span class="">Qty</span>
-          <input id="" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
-        </div>
-        <div class="flex flex-row">
-          <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
-          <input id="" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
-        </div>
-        <div>
-          <span class="flex flex-row">Total:</span>
-          <span id="" class="text-xl"></span>
-        </div>
-        <div>
-          <button class="text-white text-center bg-gray-400 rounded-lg h-[2.5rem] w-[5rem]">Create</button>
-        </div>
-      </div>
-
-      <div class="pt-4">
-        <div>
-          <span class="text-xs">Work item:</span>
-          <input id="" class="bg-gray-100 w-full h-[2.5rem] border-1 p-2" placeholder="Enter title of the work item">
+        <div class="flex flex-row justify-between items-end font-bold mt-6">
+          <div class="text-4xl ">
+            <h1>Add</h1>
+          </div>
+          <div>
+            <span class="">Qty</span>
+            <input id="" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
+          </div>
+          <div class="flex flex-row">
+            <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
+            <input id="" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
+          </div>
+          <div>
+            <span class="flex flex-row">Total:</span>
+            <span id="" class="text-xl"></span>
+          </div>
+          <div>
+            <button class="text-white text-center bg-gray-400 rounded-lg h-[2.5rem] w-[5rem]">Create</button>
+          </div>
         </div>
 
         <div class="pt-4">
-          <span class="text-xs">Description:</span>
-          <textarea id="" class="bg-gray-100 w-full h-[7rem] border-1 p-2" placeholder="Write what this work item about"></textarea>
+          <div>
+            <span class="text-xs">Work item:</span>
+            <input id="" class="bg-gray-100 w-full h-[2.5rem] border-1 p-2" placeholder="Enter title of the work item">
+          </div>
+
+          <div class="pt-4">
+            <span class="text-xs">Description:</span>
+            <textarea id="" class="bg-gray-100 w-full h-[7rem] border-1 p-2"
+              placeholder="Write what this work item about"></textarea>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
   <div class="m-16 p-12 flex flex-col bg-white">
@@ -55,7 +62,8 @@
 
       <div class="flex flex-row basis-1/2 text-3xl">
         <p class="text-gray-600 mr-3">№</p>
-        <input id="" type="text" class=" w-[80px] h-[40px] border-b-2 border-gray-400 text-gray-800 focus:outline-none">
+        <input id="operationNumber" type="number" min="1" max="9999" value=""
+          class="w-[80px] h-[40px] border-b-2 border-gray-400 text-gray-800 focus:outline-none">
       </div>
 
       <div class="flex flex-col basis-1/2">
@@ -110,7 +118,8 @@
         </div>
       </div>
       <div class="mt-14">
-        <button class="bg-gray-200 text-lg font-bold rounded-full w-8 h-8 hover:bg-gray-400">+</button>
+        <button id="addNewElement"
+          class="bg-gray-200 text-lg font-bold rounded-full w-8 h-8 hover:bg-gray-400">+</button>
       </div>
       <div class="flex justify-end mt-40 ">
         <div class="flex flex-col basis-1/2 border-t-2 border-black">
@@ -140,7 +149,6 @@
             <div class="flex justify-between flex-row mt-2">
               <span class="font-bold">Total</span>
               <span>0 <span class="text-gray-400">$</span> </span>
-
             </div>
           </div>
         </div>
@@ -167,6 +175,7 @@
 
     </footer>
   </div>
+  <script src="main.js"></script>
 </body>
 
 </html>
