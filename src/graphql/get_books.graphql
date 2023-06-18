@@ -4,8 +4,8 @@ query GetBooks {
         title
         pages
         id
-        author{
-          name
+        authorr {
+            name
         }
     }
 }

@@ -1,25 +1,44 @@
-<script setup>
+<script setup lang="ts">
 import RegistrationForm from '@/components/RegistrationForm.vue';
 import ROUTES from '@/constants/routes.js';
-import PROVIDE from '@/constants/provides.js';
-import { inject, ref } from 'vue';
+import {ref} from 'vue';
+import {useLazyQuery} from '@vue/apollo-composable';
+import gql from 'graphql-tag';
+import {useUserStore} from '@/store/userStore';
 
-const pb = inject(PROVIDE.PB);
-const isSucces = ref(false);
+const isSuccess = ref(false);
+const userStore = useUserStore();
 
-const onLogin = (dto) => {
-  pb.collection('users').authWithPassword(
-    dto.username,
-    dto.password
-  ).then(() =>{
-    isSucces.value = true;
-  });
+const { load, onResult, onError } = useLazyQuery(gql`query GetUserWithCredentials($username: String!, $password: String!) {
+  user(where: {name: {_eq: $username}, password: {_eq: $password}}) {
+      name
+      password
+      id
+    }
+  }
+`);
+
+onResult((result) => {
+  console.log('result', result);
+  if (!result.loading) {
+    if (result.data.user.length === 1) {
+      userStore.setupUser(result.data.user[0]);
+      isSuccess.value = true;
+    }
+  }
+});
+onError((error) => {
+  console.log(error);
+});
+
+const onLogin = (dto: any) => {
+  load(null, dto);
 };
 
 </script>
 <template>
-  <div v-if="!isSucces">
-    <RegistrationForm @login="onLogin"/>
+  <div v-if="!isSuccess">
+    <RegistrationForm @login="onLogin" />
     <router-link :to="ROUTES.SIGNUP">
       Sign Up
     </router-link>

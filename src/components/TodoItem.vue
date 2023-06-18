@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    {{ index }}
+    {{ index }})
     <router-link :to="pathToEdit">
       {{ text }}
     </router-link>

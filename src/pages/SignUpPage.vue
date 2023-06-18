@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {inject, ref} from 'vue';
 
 import ROUTES from '@/constants/routes.js';
@@ -36,7 +36,7 @@ const onRegister = (dto) => {
           console.log('> item', data);
           errors.value.push(data.message);
         }
-      } else{
+      } else {
         errors.value.push(error.message);
       }
     });

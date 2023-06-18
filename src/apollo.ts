@@ -3,7 +3,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: 'http://81.200.156.6:8080/v1/graphql',
+  uri: 'http://localhost:8080/v1/graphql',
 });
 
 // Cache implementation

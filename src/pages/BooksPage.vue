@@ -1,7 +1,8 @@
-<script setup>
-import {inject, isReadonly, onMounted, ref} from 'vue';
+<script setup lang="ts">
+import {inject, onMounted, ref} from 'vue';
+import {useRouter} from 'vue-router';
+
 import PROVIDE from '@/constants/provides.js';
-import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
@@ -9,7 +10,7 @@ const domInputFile = ref(null);
 const domBtnUpload = ref(null);
 
 const isReady = ref(false);
-const isUpLoading = ref(false);
+const isUploading = ref(false);
 const isBooksLoading = ref(false);
 
 const BOOKS_ITEMS_PER_PAGE = 10;
@@ -23,27 +24,24 @@ const db = inject(PROVIDE.DB);
 
 const booksCollection = pb.collection('books');
 
-const loadBook = async () => {
+const loadBooks = async () => {
   isBooksLoading.value = true;
-  return db.allDocs({include_docs: true, limit: BOOKS_ITEMS_PER_PAGE, scip: (pageIndex.value - 1) * BOOKS_ITEMS_PER_PAGE}).then((result) => {
+  return db.allDocs({include_docs: true, limit: BOOKS_ITEMS_PER_PAGE, skip: (pageIndex.value - 1) * BOOKS_ITEMS_PER_PAGE}).then((result) => {
     console.log('> BooksPage -> loadBooks: result =', result);
-
     pagesMax.value = Math.ceil(result.total_rows / BOOKS_ITEMS_PER_PAGE);
     books.value = result.rows.map(item => item.doc);
     isBooksLoading.value = false;
-  }).catch((e) =>{
+  }).catch((e) => {
     console.log('> BooksPage -> loadBooks: error =', e);
   });
 
-  // return booksCollection.getList(pageIndex.value, 10).then((result) =>{
-  //   console.log('booksCollection: ', booksCollection);
-  //   console.log('> result:', result);
+  // return booksCollection.getList(pageIndex.value, BOOKS_ITEMS_PER_PAGE).then((result) => {
+  //   console.log('> result', result);
   //   pagesMax.value = result.totalPages;
   //   books.value = result.items;
   //   isBooksLoading.value = false;
   // });
 };
-console.log('booksCollection: ', booksCollection);
 
 const insertBooks = async (booksList) => {
   return db.bulkDocs(booksList, {include_docs: true}).then((results) => {
@@ -55,19 +53,18 @@ const insertBooks = async (booksList) => {
 
 const onUploadClick = () => {
   console.log('> BooksPage -> onUploadClick:', domInputFile.value);
-  const setActiveUploadUI = (value, negativeValue = !value) => {
+  const setActiveForUploadUI = (value, negativeValue = !value) => {
     domBtnUpload.value.disabled = negativeValue;
     domInputFile.value.disabled = negativeValue;
-    isUpLoading.value = negativeValue;
+    isUploading.value = negativeValue;
   };
-
   domInputFile.value.oninput = () => {
     const fileList = domInputFile.value.files;
     const selectedFile = fileList[0];
     const reader = new FileReader();
-    console.log('> \t files', fileList);
-    console.log('> \t selectedFile:', selectedFile);
-    setActiveUploadUI(false);
+    console.log('>\t files', fileList);
+    console.log('>\t selectedFile:', selectedFile);
+    setActiveForUploadUI(false);
 
     reader.onload = async () => {
       const booksRaw = JSON.parse(reader.result.toString());
@@ -77,28 +74,29 @@ const onUploadClick = () => {
       } catch (e) {
         console.log(e);
       }
-      setActiveUploadUI(true);
+      setActiveForUploadUI(true);
       reader.onload = null;
-      domInputFile.value.oninput  = null;
-      await loadBook();
+      domInputFile.value.oninput = null;
+      await loadBooks();
     };
     reader.readAsText(selectedFile);
   };
   domInputFile.value.click();
 };
 
-const onChangPage = (delta) =>{
-  console.log('BooksPage --> onChangPage:', {delta});
+const onChangePage = (delta) => {
+  console.log('> BooksPage -> onChangePage', {delta});
   pageIndex.value += delta;
-  loadBook().then(() => {
-    router.replace({ query: {page: pageIndex.value}
+  loadBooks().then(() => {
+    router.replace( {
+      query: { page: pageIndex.value }
     });
   });
 };
 
-onMounted(()=>{
+onMounted(() => {
   Promise.all([
-    loadBook()
+    loadBooks()
   ]).then(() => {
     isReady.value = true;
   });
@@ -107,26 +105,26 @@ onMounted(()=>{
 </script>
 <template>
   <div v-if="!isReady">
-    Page loading
+    Page Loading
   </div>
   <div v-else>
     <div v-if="books.length > 0">
-      <button 
+      <button
         :disabled="pageIndex === 1"
-        @click="onChangPage(-1)"
+        @click="onChangePage(-1)"
       >
         Prev
       </button>
       <button
         :disabled="pageIndex === pagesMax"
-        @click="onChangPage(1)"
+        @click="onChangePage(1)"
       >
         Next
       </button>
       <div>
-        <b>Books ({{ pageIndex}} / {{ pagesMax }}):</b>
-        <div 
-          v-for="book in books" 
+        <b>Books ( {{ pageIndex }} / {{ pagesMax }} ):</b>
+        <div
+          v-for="book in books"
           :key="book.id"
         >
           {{ book.title }}
@@ -134,21 +132,25 @@ onMounted(()=>{
       </div>
     </div>
     <div v-else>
-      <input 
-        ref="domInputFile" 
-        hidden 
-        type="file" 
+      <input
+        ref="domInputFile"
+        hidden
+        type="file"
         accept=".json"
       >
-      <button 
+      <button
         ref="domBtnUpload"
         @click="onUploadClick"
       >
         Upload
       </button>
-      <div v-if="isUpLoading">
+      <div v-if="isUploading">
         In progess, wait please ...
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+
+</style>
