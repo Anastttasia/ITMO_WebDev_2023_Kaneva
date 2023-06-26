@@ -25,27 +25,25 @@
           </div>
           <div>
             <span class="">Qty</span>
-            <input id="" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
+            <input id="qtyModal" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
           </div>
           <div class="flex flex-row">
             <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
-            <input id="" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
+            <input id="costModal" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
           </div>
-          <div>
+          <div class="flex flex-row">
             <span class="flex flex-row">Total:</span>
-            <span id="" class="text-xl"></span>
+            <p id="totalModal"></p>
           </div>
           <div>
-            <button class="text-white text-center bg-gray-400 rounded-lg h-[2.5rem] w-[5rem]">Create</button>
+            <button id="createBtn" class="text-white text-center enabled:bg-gray-700 rounded-lg h-[2.5rem] w-[5rem] disabled:bg-gray-400">Create</button>
           </div>
         </div>
-
         <div class="pt-4">
           <div>
             <span class="text-xs">Work item:</span>
-            <input id="" class="bg-gray-100 w-full h-[2.5rem] border-1 p-2" placeholder="Enter title of the work item">
+            <input type="text" id="titleModal" class="bg-gray-100 w-full h-[2.5rem] border-1 p-2" placeholder="Enter title of the work item">
           </div>
-
           <div class="pt-4">
             <span class="text-xs">Description:</span>
             <textarea id="" class="bg-gray-100 w-full h-[7rem] border-1 p-2"
@@ -110,13 +108,14 @@
         <div class="basis-1/2 flex flex-row">
           <div class="basis-1/2 flex flex-row">
             <span class="mr-28">Qty:</span>
-            <input type="text" class="">
+            <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
           </div>
           <div class="basis-1/2 flex flex-row justify-end">
-            <span class="flex flex-row">Total <p class="text-gray-400">($)</p></span>
+            <span class="flex flex-row">Total <p class="text-gray-400">($)</p></p></span>
           </div>
         </div>
       </div>
+      <div id="containerColumn" class="flex flex-col"></div>
       <div class="mt-14">
         <button id="addNewElement"
           class="bg-gray-200 text-lg font-bold rounded-full w-8 h-8 hover:bg-gray-400">+</button>
