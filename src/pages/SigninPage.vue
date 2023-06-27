@@ -10,7 +10,7 @@ const isSuccess = ref(false);
 const userStore = useUserStore();
 
 const { load, onResult, onError } = useLazyQuery(gql`query GetUserWithCredentials($username: String!, $password: String!) {
-  user(where: {name: {_eq: $username}, password: {_eq: $password}}) {
+  users(where: {name: {_eq: $username}, password: {_eq: $password}}) {
       name
       password
       id
@@ -20,11 +20,10 @@ const { load, onResult, onError } = useLazyQuery(gql`query GetUserWithCredential
 
 onResult((result) => {
   console.log('result', result);
-  if (!result.loading) {
-    if (result.data.user.length === 1) {
-      userStore.setupUser(result.data.user[0]);
-      isSuccess.value = true;
-    }
+  const usersData = result.data?.users;
+  isSuccess.value = usersData?.length === 1;
+  if (isSuccess.value) {
+    userStore.setupUser(usersData[0]);
   }
 });
 onError((error) => {

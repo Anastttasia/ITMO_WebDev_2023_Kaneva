@@ -1,5 +1,10 @@
 <script setup lang="ts">
 defineProps({
+  bgColor: {
+    type: String,
+    default: 'transparent',
+    required: true
+  },
   links: {
     type: Array,
     default: () => [],
@@ -8,7 +13,7 @@ defineProps({
 });
 </script>
 <template>
-  <div>
+  <div :style="{ 'background-color': bgColor }">
     <template
       v-for="menuItem in links"
       :key="menuItem.name"
@@ -19,7 +24,7 @@ defineProps({
         @click="menuItem.onClick"
       >
         {{ menuItem.name }}
-      </router-link> 
+      </router-link>
     </template>
   </div>
 </template>

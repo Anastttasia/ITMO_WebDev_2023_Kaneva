@@ -1,5 +1,15 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useBooksStore } from '@/store/booksStore.js';
+
+const { selectedBook } = storeToRefs(useBooksStore());
+</script>
+
 <template>
   <h3><slot>Header</slot></h3>
+  <div v-if="selectedBook">
+    {{ selectedBook.title }}
+  </div>
   <div>
     <small>
       <slot name="sub-header" />
