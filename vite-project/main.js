@@ -1,9 +1,27 @@
-// import newElementTable from "./tamplate";
+import newElementTable from "./template";
 
-let operationNumber = document.getElementById('operationNumber').value;
-console.log('operationNumber =', operationNumber);
+const itemsContainer = document.getElementById('containerColumn');
 
-const domElementColun = document.getElementById('containerColumn');
+let currentInvoiceData = getAllLocalData();
+let currentId = currentInvoiceData ? currentInvoiceData["id"] : 0;
+let currentItems = currentInvoiceData ? currentInvoiceData["items"] : new Array();
+//let currentDiscount = currentInvoiceData["discount"];
+//let currentTaxes = currentInvoiceData["taxes"];
+//let currentTotal = currentInvoiceData["total"];
+//let currentIban = currentInvoiceData["iban"];
+
+currentItems.forEach(item => {
+    let currentTemplate = new newElementTable(Number(item['qty']), Number(item['cost']));
+    currentTemplate.itemTitle = String(item['title']);
+    itemsContainer.prepend(currentTemplate.render());
+});
+
+
+console.log(currentInvoiceData)
+
+let operationNumber = document.getElementById('operationNumber');
+operationNumber.value = Number(currentId);
+console.log('operationNumber =', operationNumber.value);
 
 let qtyModal = document.getElementById('qtyModal');
 let costModal = document.getElementById('costModal');
@@ -12,7 +30,9 @@ const createBtn = document.getElementById('createBtn');
 createBtn.setAttribute("disabled", true);
 createBtn.classList.add('createBtnActive');
 
-function countTotalModal(qtyModal, costModal) {
+
+//MODAL START
+function countTotalModal() {
     let formula = qtyModal.value * costModal.value;
     let result = JSON.parse(formula);
     document.getElementById('totalModal').innerText = result;
@@ -20,59 +40,20 @@ function countTotalModal(qtyModal, costModal) {
     return Number(result)
 };
 
-function tryActivateButton(resultCost) {
-    console.log('tryActivateButton -> titleModal', typeof titleModal);
-    if (resultCost > 0 && titleModal.value.length > 0) {
+function tryActivateButton() {
+    if (countTotalModal() > 0 && titleModal.value.length > 0) {
         createBtn.removeAttribute('disabled');
-
         return;
     }
-    else {
-        createBtn.setAttribute("disabled", true);
-        return;
-    }
+    createBtn.setAttribute("disabled", true);
 };
 
-qtyModal.oninput = function () {
-    let resultCost = countTotalModal(qtyModal, costModal);
-    console.log('qtyModal.oninput -> qtyModal', qtyModal.value);
-    console.log('qtyModal.oninput -> costModal', costModal.value);
-    tryActivateButton(resultCost);
-};
+operationNumber.oninput = saveDataLocal;
+qtyModal.oninput = tryActivateButton;
+costModal.oninput = tryActivateButton;
+titleModal.oninput = tryActivateButton;
+//MODAL END
 
-costModal.oninput = function () {
-    let resultCost = countTotalModal(qtyModal, costModal);
-    console.log('costModal.oninput -> qtyModal', qtyModal.value);
-    console.log('ostModal.oninput -> costModal', costModal.value);
-    tryActivateButton(resultCost);
-};
-
-titleModal.oninput = function () {
-    console.log('titleModal.oninput -> titleModal ДО string', typeof titleModal);
-    text = String(titleModal.value);
-    console.log('titleModal.oninput -> titleModal ПОСЛЕ string', typeof titleModal);
-    console.log('titleModal.oninput -> titleModal', titleModal);
-    console.log('titleModal.oninput -> titleModal.length', titleModal.length);
-    console.log('titleModal.oninput -> titleModal.value', titleModal.value);
-    if (text.length == 0) {
-        createBtn.setAttribute("disabled", true);
-        console.log('titleModal.oninput -> IF titleModal.length', titleModal.length);
-    }
-    console.log('text', text);
-    tryActivateButton();
-};
-
-
-// function renderElement(taskVO) {
-//     const domTaskClone = newElementTable.cloneNode(true);
-//     domElementColun.dataset.id = taskVO.id;
-//     QUERY(domTaskClone, Dom.Template.Task.TITLE).innerText = taskVO.title;
-//     domTaskColumn.prepend(domTaskClone);
-
-//     return domTaskClone;
-//   }
-
-//MODAL WINDOW
 const addNewElementBtn = document.getElementById('addNewElement');
 const closeModalWindowBtn = document.getElementById('closeModalWindow');
 const modalWindows = document.getElementById('modalWindow');
@@ -93,5 +74,36 @@ contentModalWindow.addEventListener("click", function (event) { event.stopPropag
 
 createBtn.onclick = function () {
     console.log('createBtn.onclick -> Вызывает');
+    let currentTemplate = new newElementTable(Number(qtyModal.value), Number(costModal.value));
+    currentTemplate.itemTitle = String(titleModal.value);
+    currentItems.push({
+        "title": String(titleModal.value),
+        "qty": Number(qtyModal.value),
+        "cost": Number(costModal.value),
+        "total": Number(qtyModal.value) * Number(costModal.value),
+    });
+    itemsContainer.prepend(currentTemplate.render());
     closeModalWindow();
+    saveDataLocal();
 };
+
+function saveDataLocal() {
+    let data = {}
+    console.log(currentItems)
+    data["id"] = operationNumber.value;
+    data["items"] = currentItems;
+    data["discount"] = 0;
+    data["taxes"] = 0;
+    let totalCost = 0;
+    currentItems.forEach(item => totalCost += item['total']);
+    data["total"] = totalCost;
+    data["iban"] = 0;
+
+    localStorage.setItem("invoice", JSON.stringify(data))
+}
+
+function getAllLocalData() {
+    return JSON.parse(localStorage.getItem('invoice'));
+}
+
+let totalSum = document.getElementById('Total');
