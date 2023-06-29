@@ -75,33 +75,37 @@ onMounted(() => {
   </div>
   <div v-else>
     <div v-if="books.length > 0">
-      <button
-        :disabled="pageIndex === 1 || isBooksLoading"
-        @click="onChangePage(-1)"
-      >
-        Prev
-      </button>
-      <button
-        :disabled="pageIndex === pagesMax || isBooksLoading"
-        @click="onChangePage(1)"
-      >
-        Next
-      </button>
+      <v-btn-group 
+      border="1">
+        <v-btn
+          :disabled="pageIndex === 1 || isBooksLoading"
+          @click="onChangePage(-1)"
+        >
+          Prev
+        </v-btn>
+        <v-btn
+          :disabled="pageIndex === pagesMax || isBooksLoading"
+          @click="onChangePage(1)"
+        >
+          Next
+        </v-btn>
+      </v-btn-group>
       <div>
         <b>Books ( {{ pageIndex }} / {{ pagesMax }} ):</b>
         <div v-if="isBooksLoading">
           Books loading
         </div>
-        <div v-else>
-          <div
+        <v-list v-else>
+          <v-list-item
             v-for="book in books"
             :key="book.id"
+            :title="book.title"
+            base-color="red"
+            class="ma-4 text-left"
+            to="`/books/${book.id}`"
           >
-            <router-link :to="`/books/${book.id}`">
-              {{ book.title }}
-            </router-link>
-          </div>
-        </div>
+          </v-list-item>
+        </v-list>
       </div>
     </div>
   </div>

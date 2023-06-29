@@ -5,12 +5,25 @@ import piniaPluginPersistedState from 'pinia-plugin-persistedstate';
 
 import router from '@/router';
 
-import AppComposition from './App.vue';
 import apolloClient from '@/apollo';
 import {DefaultApolloClient} from '@vue/apollo-composable';
 
-createApp(AppComposition)
+import App from './App.vue';
+
+// Vuetify
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+
+const vuetify = createVuetify({
+  components,
+  directives,
+});
+
+createApp(App)
   .use(createPinia().use(piniaPluginPersistedState))
   .provide(DefaultApolloClient, apolloClient)
   .use(router)
+  .use(vuetify)
   .mount('#app');
