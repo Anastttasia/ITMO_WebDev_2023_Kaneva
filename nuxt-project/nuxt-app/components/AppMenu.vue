@@ -18,13 +18,19 @@ defineProps({
       v-for="menuItem in links"
       :key="menuItem.name"
     >
-      <router-link
+      <NuxtLink
         v-if="menuItem.canRender"
         :to="menuItem.link"
+        class="menu-item"
         @click="menuItem.onClick"
       >
         {{ menuItem.name }}
-      </router-link>
+      </NuxtLink>
     </template>
   </div>
 </template>
+<style>
+.menu-item:not(:last-child) {
+  padding: 0 1rem 0 0;
+}
+</style>
