@@ -3,7 +3,6 @@ import newElementTable from "./template";
 let currentInvoiceData = getAllLocalData();
 let refOnCurrentItem = 0;
 
-
 const itemsContainer = document.getElementById('containerColumn');
 const qtyModal = document.getElementById('qtyModal');
 const costModal = document.getElementById('costModal');
@@ -24,7 +23,6 @@ const discountElem = document.getElementById('Discount');
 
 const taxesInputElem = document.getElementById('TaxesInput');
 const taxesElem = document.getElementById('Taxes');
-
 const totalElem = document.getElementById('Total');
 
 const operationNumber = document.getElementById('operationNumber');
@@ -57,14 +55,11 @@ function btnCreateElement() {
 
     subtotalElem.textContent = String(Number(subtotalElem.textContent) + Number(qtyModal.value) * Number(costModal.value));
     calculateDiscount();
-
     closeModalWindow();
 };
 
 function btnUpdateElement() {
-    
     let item = currentInvoiceData["items"][refOnCurrentItem];
-
     subtotalElem.textContent = String(Number(subtotalElem.textContent) + Number(qtyModal.value) * Number(costModal.value) - Number(item["total"]));
 
     item["title"] = String(titleModal.value);
@@ -73,20 +68,30 @@ function btnUpdateElement() {
     item["total"] = Number(qtyModal.value) * Number(costModal.value);
 
     calculateDiscount();
-    //closeModalWindow();
+    window.location.reload();
+};
+
+function btnDeleteElement() {
+    let item = currentInvoiceData["items"][refOnCurrentItem];
+    subtotalElem.textContent = String(Number(subtotalElem.textContent) - Number(item["total"]));
+
+    currentInvoiceData["items"].splice(refOnCurrentItem, 1);
+    calculateDiscount();
     window.location.reload();
 };
 
 const addNewElement = () => {
     createBtn.onclick = btnCreateElement;
     deleteBtn.style.color = 'gray';
+    deleteBtn.onclick = null;
     createBtn.innerText = "Create"
     modalWindow.classList.remove('noneModalWindow');
 };
 
 const updateElement = (event) => {
     console.log(currentInvoiceData["items"])
-    deleteBtn.style.color = 'red';
+    deleteBtn.style.color = "red";
+    deleteBtn.onclick = btnDeleteElement;
 
     createBtn.onclick = btnUpdateElement;
     createBtn.innerText = "Update"
@@ -97,7 +102,7 @@ const updateElement = (event) => {
             return;
         }
     });
-    
+
     let item = currentInvoiceData["items"][refOnCurrentItem];
 
     titleModal.value = item['title'];
@@ -186,16 +191,15 @@ function handleIbanInput() {
         ibanElem.value = currentInvoiceData["iban"];
         return;
     }
-    
-    
+
     switch (String(ibanElem.value).length) {
-        case 2: {}
-        case 7: {}
-        case 12: {}
-        case 17: {}
-        case 22: {}
-        case 27: {}
-        case 32: {}
+        case 2: { }
+        case 7: { }
+        case 12: { }
+        case 17: { }
+        case 22: { }
+        case 27: { }
+        case 32: { }
         case 37: {
             ibanElem.value = String(ibanElem.value) + ' ';
             break;
@@ -229,7 +233,7 @@ function calculateTaxes() {
 
         let result = Math.ceil(Number(discountElem.textContent) * curVal / 100);
         taxesElem.textContent = String(result);
-        
+
         currentInvoiceData["taxes"] = curVal;
     }
     calculateTotalCost();
@@ -237,7 +241,6 @@ function calculateTaxes() {
 
 function calculateDiscount() {
     let curVal = Number(discountInputElem.value)
-
     if (!curVal) {
         discountInputElem.value = "";
         discountElem.textContent = "0";
@@ -251,11 +254,9 @@ function calculateDiscount() {
 
         let result = Math.floor(Number(subtotalElem.textContent) * (1.0 - (curVal / 100)));
         discountElem.textContent = String(result);
-        
+
         currentInvoiceData["discount"] = curVal;
     }
-
-
     calculateTaxes();
 };
 
@@ -272,9 +273,7 @@ function saveDataLocal() {
 }
 
 function getAllLocalData() {
-
     let data = JSON.parse(localStorage.getItem('invoice'));
-
     if (data == null) {
         data = {};
         data["id"] = 0;
@@ -284,6 +283,5 @@ function getAllLocalData() {
         data["total"] = 0;
         data["iban"] = 0;
     }
-
     return data;
 }
