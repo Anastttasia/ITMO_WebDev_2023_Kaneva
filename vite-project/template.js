@@ -18,14 +18,14 @@ class newElementTable {
       const div = document.createElement('div');
       div.innerHTML =
         `
-        <div class="flex flex-row font-bold text-gray-600 border-b-2 border-gray-200">
+        <div class="flex flex-row text-gray-600 border-b-2 border-gray-200 p-2 hover:bg-gray-100">
             <div class="basis-1/2">
-              <span>${this.#itemTitle}</span>
+              <span class="font-bold">${this.#itemTitle}</span>
             </div>
             <div class="basis-1/2 flex flex-row">
               <div class="basis-1/2 flex flex-row">
-                <span class="mr-28">${this.#qty}</span>
-                <span class="flex flex-row">${this.#cost}</span>
+                <span class="basis-1/2 items-start">${this.#qty}</span>
+                <span class="basis-1/2 items-start flex flex-row">${this.#cost}</span>
             </div>
             <div class="basis-1/2 flex flex-row justify-end">
                 <span class="flex flex-row">${this.#total}</span>

@@ -12,10 +12,10 @@
 
 <body class="bg-gray-200">
   <div id="modalWindow" class="noneModalWindow">
-    <div id="bgModalWindow" class="backdrop-opacity-20 backdrop-invert bg-black/30 w-full h-full absolute top-0 z-20">
+    <div id="bgModalWindow" class="backdrop-opacity-20 backdrop-invert bg-black/30 w-full h-full fixed top-0 z-20">
       <div id="contentModalWindow" class="bg-white h-[25rem] z-30 m-16 mt-0 p-12">
         <div class="flex flex-row justify-between">
-          <button class="text-gray-400">Delete</button>
+          <button id="btnDelete" class="text-gray-400">Delete</button>
           <button id="closeModalWindow" class="text-gray-400 hover:text-black">close</button>
         </div>
 
@@ -25,11 +25,17 @@
           </div>
           <div>
             <span class="">Qty</span>
-            <input id="qtyModal" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
+            <input 
+            id="qtyModal" 
+            type="text" 
+            class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
           </div>
           <div class="flex flex-row">
             <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
-            <input id="costModal" type="text" class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
+            <input 
+            id="costModal" 
+            type="text" 
+            class="w-[4rem]  border-b-2 border-gray-200 text-gray-800 focus:outline-none">
           </div>
           <div class="flex flex-row">
             <span class="flex flex-row">Total:</span>
@@ -42,7 +48,11 @@
         <div class="pt-4">
           <div>
             <span class="text-xs">Work item:</span>
-            <input type="text" id="titleModal" class="bg-gray-100 w-full h-[2.5rem] border-1 p-2" placeholder="Enter title of the work item">
+            <input 
+            type="text" 
+            id="titleModal" 
+            class="bg-gray-100 w-full h-[2.5rem] border-1 p-2" 
+            placeholder="Enter title of the work item">
           </div>
           <div class="pt-4">
             <span class="text-xs">Description:</span>
@@ -60,8 +70,13 @@
 
       <div class="flex flex-row basis-1/2 text-3xl">
         <p class="text-gray-600 mr-3">№</p>
-        <input id="operationNumber" type="number" min="1" max="9999" value=""
-          class="w-[80px] h-[40px] border-b-2 border-gray-400 text-gray-800 focus:outline-none">
+        <input 
+        id="operationNumber" 
+        type="number" 
+        min="1" 
+        max="9999" 
+        value=""
+        class="w-[80px] h-[40px] border-b-2 border-gray-400 text-gray-800 focus:outline-none">
       </div>
 
       <div class="flex flex-col basis-1/2">
@@ -106,9 +121,9 @@
           <span>Item</span>
         </div>
         <div class="basis-1/2 flex flex-row">
-          <div class="basis-1/2 flex flex-row">
-            <span class="mr-28">Qty:</span>
-            <span class="flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
+          <div class="basis-1/2 flex flex-row ">
+            <span class="basis-1/2 items-start">Qty:</span>
+            <span class="basis-1/2 items-start flex flex-row">Cost <p class="text-gray-400">($)</p> </span>
           </div>
           <div class="basis-1/2 flex flex-row justify-end">
             <span class="flex flex-row">Total <p class="text-gray-400">($)</p></p></span>
@@ -128,8 +143,11 @@
           </div>
           <div class="flex justify-between flex-row mt-2">
             <label class="flex flex-row">Discount (
-              <input id="DiscountInput" type="text" value="0"
-                class="w-4 text-lg border-b-2 border-gray-200 text-gray-400 focus:outline-none">
+              <input 
+              id="DiscountInput" 
+              type="text" 
+              value="0"
+              class="w-6 text-lg border-b-2 border-gray-200 text-gray-400 focus:outline-none">
               <p>%</p>)
               <span class="text-gray-400 text-xs ml-2">floor</span>
             </label>
@@ -137,8 +155,11 @@
           </div>
           <div class="flex justify-between flex-row mt-2">
             <label class="flex flex-row">Taxes (
-              <input id="TaxesInput" type="text" value="0"
-                class="w-4 text-lg border-b-2 border-gray-200 text-gray-400 focus:outline-none">
+              <input 
+              id="TaxesInput" 
+              type="text" 
+              value="0"
+              class="w-6 text-lg border-b-2 border-gray-200 text-gray-400 focus:outline-none">
               <p>%</p>)
               <span class="text-gray-400 text-xs ml-2">ceil</span>
             </label>
@@ -156,7 +177,15 @@
     </main>
     <footer class="flex justify-end mt-40">
       <div class="flex flex-col basis-1/2">
-        <h2 class="font-bold mb-4">IBAN</h2>
+        <div class="flex flex-row justify-between">
+          <h2 class="font-bold mb-4">IBAN</h2>
+          <input 
+          type="text" 
+          id="Iban" 
+          class="w-[23rem] border-b-2 border-gray-200 input-percentage placeholder:text-slate-200 items-end text-lg focus:outline-none" 
+          placeholder="Up to 34 alphanumeric characters">
+        </div>
+        
         <span>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
           nisi ut aliquip ex ea commodo consequat.
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
