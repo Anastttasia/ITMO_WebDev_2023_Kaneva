@@ -1,4 +1,4 @@
-import newElementTable from "./template";
+import newElementTable from "./template.js";
 
 let currentInvoiceData = getAllLocalData();
 let refOnCurrentItem = 0;
@@ -212,35 +212,34 @@ function handleIbanInput() {
 ibanElem.oninput = handleIbanInput;
 
 function calculateTotalCost() {
-    let result = Number(discountElem.textContent) + Number(taxesElem.textContent);
+    let result =  Number(subtotalElem.textContent) - Number(discountElem.textContent) + Number(taxesElem.textContent);
     totalElem.textContent = String(result);
     currentInvoiceData["total"] = result;
     saveDataLocal();
 }
 
 function calculateTaxes() {
-    let curVal = Number(taxesInputElem.value)
+    let curVal = Number(taxesInputElem.value);
     if (!curVal) {
         taxesInputElem.value = "";
-        taxesElem.textContent = "0"
+        taxesElem.textContent = "0";
     }
     else if (curVal > 100) {
         taxesInputElem.value = "";
-        taxesElem.textContent = "0"
+        taxesElem.textContent = "0";
     }
     else {
-        taxesInputElem.value = String(curVal)
+        taxesInputElem.value = String(curVal);
 
-        let result = Math.ceil(Number(discountElem.textContent) * curVal / 100);
+        let result = Math.ceil(Number(subtotalElem.textContent) - Number(discountElem.textContent) * curVal / 100);
         taxesElem.textContent = String(result);
-
-        currentInvoiceData["taxes"] = curVal;
     }
+    currentInvoiceData["taxes"] = curVal;
     calculateTotalCost();
 };
 
 function calculateDiscount() {
-    let curVal = Number(discountInputElem.value)
+    let curVal = Number(discountInputElem.value);
     if (!curVal) {
         discountInputElem.value = "";
         discountElem.textContent = "0";
@@ -250,13 +249,12 @@ function calculateDiscount() {
         discountElem.textContent = "0";
     }
     else {
-        discountInputElem.value = String(curVal)
+        discountInputElem.value = String(curVal);
 
-        let result = Math.floor(Number(subtotalElem.textContent) * (1.0 - (curVal / 100)));
+        let result = Math.floor(Number(subtotalElem.textContent) * (curVal / 100));
         discountElem.textContent = String(result);
-
-        currentInvoiceData["discount"] = curVal;
     }
+    currentInvoiceData["discount"] = curVal;
     calculateTaxes();
 };
 
@@ -269,7 +267,7 @@ bgModalWindow.addEventListener("click", closeModalWindow);
 contentModalWindow.addEventListener("click", function (event) { event.stopPropagation(); })
 
 function saveDataLocal() {
-    localStorage.setItem("invoice", JSON.stringify(currentInvoiceData))
+    localStorage.setItem("invoice", JSON.stringify(currentInvoiceData));
 }
 
 function getAllLocalData() {
