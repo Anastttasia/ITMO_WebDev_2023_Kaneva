@@ -231,7 +231,7 @@ function calculateTaxes() {
     else {
         taxesInputElem.value = String(curVal);
 
-        let result = Math.ceil(Number(subtotalElem.textContent) - Number(discountElem.textContent) * curVal / 100);
+        let result = Math.ceil((Number(subtotalElem.textContent) - Number(discountElem.textContent)) * curVal / 100);
         taxesElem.textContent = String(result);
     }
     currentInvoiceData["taxes"] = curVal;
