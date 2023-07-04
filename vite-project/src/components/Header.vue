@@ -18,14 +18,14 @@
   position: sticky;
   top: 0;
   left: 0;
-  background-color: rgba(190, 190, 190, 0.418);
+  background-color: rgba(190, 190, 190, 0.7);
   max-width: 100vw;
   height: 55px;
   display: flex;
   justify-content:space-between;
   align-items: center;
   z-index: 2;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   padding: 0 1rem 0 1rem;
   color: gray;
   border-radius: 5px;
