@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
+  ssr: false,
   devServer: {
     port: 3000,
   },
@@ -21,7 +22,7 @@ export default defineNuxtConfig({
       }
     },
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   telemetry: false,
   googleFonts: {
     families: {
