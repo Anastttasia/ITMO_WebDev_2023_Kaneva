@@ -18,10 +18,33 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  padding: 0 1rem;
 }
 
 #app {
   width: 100%;
-  padding: 0 12rem 0 12rem; 
+  padding: 0 5rem 0 5rem ; 
+  /* margin: auto ; */
 }
+
+@media screen and (orientation: portrait) {
+  #app {
+    width: 100%;
+    padding: 0 1rem 0 1rem ; 
+    /* margin: auto ; */
+  }
+
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 0;
+  }
+  #app {
+    width: 100%;
+    padding: 0; 
+    /* margin: auto ; */
+  }
+}
+
 

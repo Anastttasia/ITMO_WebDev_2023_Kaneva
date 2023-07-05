@@ -27,6 +27,7 @@
   z-index: 2;
   margin-bottom: 20px;
   padding: 0 1rem 0 1rem;
+  margin-bottom: 2rem;
   color: gray;
   border-radius: 5px;
 }
@@ -57,4 +58,24 @@ h3{
   font-size: small;
   margin-left: 5rem;
 }
+
+@media (max-width: 640px) {
+  .header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: rgba(190, 190, 190, 0.7);
+  max-width: 100vw;
+  height: 55px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  z-index: 2;
+  margin-bottom: 20px;
+  margin: 0 0.5rem 0 0.5rem;
+  color: gray;
+  border-radius: 5px;
+}
+}
 </style>
+
