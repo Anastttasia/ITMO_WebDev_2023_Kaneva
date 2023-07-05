@@ -1,6 +1,6 @@
 <script setup>
 import data from '../constants/constants.js'
-import Template from './templateCard.vue'
+import Template from '../components/templateCard.vue'
 // let containerForCards = document.getElementById('containerForCardsVase');
 // for (let i = 0; i < data.doors.length; i++) {
 //   containerForCards.appendChild(createCard(data.descriptions.door, data.doors[i]));

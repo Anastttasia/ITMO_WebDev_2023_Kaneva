@@ -1,14 +1,16 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
-import ContainerForCard from './components/ContainerForCard.vue';
+import ProductList from './pages/productList.vue';
 import PageCard from './pages/pageCard.vue';
+import Bascet from './pages/cardBasket.vue'
+
 </script>
 
 <template>
 <Header></Header>
-<PageCard></PageCard>
-<!-- <ContainerForCard></ContainerForCard> -->
+<!-- <PageCard></PageCard> -->
+<!-- <ProductList></ProductList> -->
+<Bascet></Bascet>
 </template>
 
 <style scoped>
