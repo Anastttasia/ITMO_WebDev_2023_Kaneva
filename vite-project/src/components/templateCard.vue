@@ -13,25 +13,26 @@
                 </p>
             </div>
         </a>
-        <button class="button">Add</button>
+        <div class="btnBlock">
+            <button class="buttonBin"><img src="../image/icon/delete.png" style="width: 15px; height: 15px;"></button>
+            <button class="button">Add</button>
+        </div>
     </div>
 </template>
 
 <style scoped>
     .card{
         width: 100%;
-        /* height: 425px; */
         background-color: rgba(190, 190, 190, 0.418);
         display: flex;
         flex-direction: column;
         align-items: center;
         border-radius: 5%;
         color: black;
-        padding: 5px  5px 1rem 5px;
+        padding: 5px  5px 0.5rem 5px;
     }
 
     .containerImg{
-        /* height: 50%; */
         background-color: white;
         padding: 3rem;
         display: flex;
@@ -60,6 +61,25 @@
         font-size: 12px;
         color: rgba(43, 41, 41, 0.658);
     }
+    .btnBlock{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 1rem ;
+        align-items: center;
+        justify-content:center;
+    }
+    .buttonBin{
+        width: 40px;
+        height: 35px;
+        border-radius: 5px;
+        background-color: rgba(199, 42, 14, 0.226);
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        margin: 1rem 1rem 0 4px ;
+    }
     .button{
         width: 100%;
         height: 35px;
@@ -69,7 +89,6 @@
         background-color: transparent;
         color: rgb(125, 199, 14);
         margin-top: 1rem;
-        
     }
     .button:hover{
         background-color: rgba(125, 199, 14, 0.171);
