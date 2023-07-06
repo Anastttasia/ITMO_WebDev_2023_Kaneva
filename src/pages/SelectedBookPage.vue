@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import { computed, onMounted, ref } from 'vue';
 import { useUserStore } from '@/store/userStore';
 import { storeToRefs } from 'pinia';
-import { useBooksStore } from '@/store/booksStore.js';
+import { useBooksStore } from '@/store/booksStore';
 
 const route = useRoute();
 const userStore = useUserStore();
@@ -12,33 +12,6 @@ const booksStore = useBooksStore();
 const { userId } = storeToRefs(userStore);
 
 const domInputComment = ref<HTMLInputElement | null>(null);
-
-// const { result, loading: isBookLoading } = useQuery(gql`
-// query GetBooks($id: Int!) {
-//   books_by_pk(id: $id) {
-//     id
-//     pages
-//     year
-//     author
-//     country
-//     imageLink
-//     language
-//     link
-//     title
-//     created_at
-//     updated_at
-//     comments {
-//       comment
-//       id
-//       user {
-//         name
-//       }
-//     }
-//   }
-// }
-// `, { id: route.params.id });
-// const book = computed(() => result.value.books_by_pk);
-
 const { selectedBook, isSelectedBookLoading } = storeToRefs(booksStore);
 const bookTitle = computed(() => selectedBook.value.title);
 const bookYear = computed(() => selectedBook.value.year);

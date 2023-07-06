@@ -1,25 +1,16 @@
-import gql from 'graphql-tag';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core';
 
-const query = gql`
-    query GetBooks($limit: Int!, $offset: Int!) {
-        books(limit: $limit, offset: $offset) {
-            id
-            title
-            imageLink
-        }
-        books_aggregate {
-            aggregate {
-                count
-            }
-        }
+const apolloClient = new ApolloClient({
+  link: createHttpLink({
+    uri: process.env.VITE_GRAPHQL_END_POINT,
+    headers: {
+      'x-hasura-admin-secret': process.env.VITE_GRAPHQL_ADMIN_SECRET ?? ''
     }
-`;
+  }),
+  cache: new InMemoryCache(),
+});
 
-export default defineEventHandler(async (event) => {
-  const { data } = await event.context.apolloClient.query({ query, variables: { limit: 10, offset: 0 }});
-  if (data?.books) {
-    console.log(data?.books);
-    return data.books;
-  }
-  return [];
+export default defineEventHandler((event) => {
+  // console.log(event.context);
+  event.context.apolloClient = apolloClient;
 });

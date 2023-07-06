@@ -1,7 +1,9 @@
 <template>
   <div>User Page</div>
+  <div>{{ users }}</div>
 </template>
 
-<style scoped>
-
-</style>
+<script setup lang="ts">
+const users = ref<Array<any>>([]);
+useFetch('/api/users').then((response) => users.value = response.data.value);
+</script>

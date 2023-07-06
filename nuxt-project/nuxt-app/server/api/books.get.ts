@@ -16,10 +16,16 @@ const query = gql`
 `;
 
 export default defineEventHandler(async (event) => {
-  const { data } = await event.context.apolloClient.query({ query, variables: { limit: 10, offset: 0 }});
-  if (data?.books) {
-    console.log(data?.books);
-    return data.books;
+  try {
+    const { data } = await event.context.apolloClient.query(
+      { query, variables: { limit: 10, offset: 0 }});
+
+    if (data?.books) {
+      console.log(data?.books);
+      return data.books;
+    }
+  } catch (e) {
+    console.log(`> books -> get: error = ${e}`);
   }
   return [];
 });
