@@ -7,11 +7,15 @@ import Bascet from './pages/cardBasket.vue'
 </script>
 
 <template>
-<Header></Header>
-<!-- <PageCard></PageCard> -->
-<!-- <ProductList></ProductList> -->
-<Bascet></Bascet>
+    <Header></Header>
+    <div class="container">
+        <ProductList></ProductList>
+    </div>
+
 </template>
 
 <style scoped>
+    .container{
+        max-width: 100%;
+    }
 </style>

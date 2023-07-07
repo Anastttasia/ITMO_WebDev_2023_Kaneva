@@ -8,7 +8,9 @@
       </div>
       <div class="slotHeader">
         <span>Total:<p id=""></p></span>
-        <button class="btn">Card <p id=""></p></button>
+        <router-link to="/">
+          <button class="btn">Card <p id=""></p></button>
+        </router-link>
       </div>
     </div>
 </template>

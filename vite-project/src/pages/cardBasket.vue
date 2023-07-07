@@ -1,5 +1,6 @@
 <script setup>
-import templateUpCard from '../components/templateUpCard.vue'
+import templateUpCard from '../components/templateUpCard.vue';
+
 </script>
 
 <template>
