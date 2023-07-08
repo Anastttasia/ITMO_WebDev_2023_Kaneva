@@ -21,6 +21,7 @@ export default {
             
             let counterTotal = 0;
             let itemsCount = 0;
+
             for (let key in cartData) {
                 if (cartData[key]) {
                     counterTotal = counterTotal + Number(cartData[key].itemData.price * cartData[key].count);
@@ -44,10 +45,7 @@ export default {
 <template>
     <Header :total="total" :itemsCount="itemsCount"></Header>
     <div class="container">
-        <ProductList
-            v-on:updateTotal="updateCart()"
-        >
-        </ProductList>
+        <router-view v-on:updateTotal="updateCart()"/>
     </div>
 
 </template>

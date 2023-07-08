@@ -23,11 +23,11 @@ export default {
 <template>
     <div class="header">
       <div class="navigationMenu">
-        <h3>Products</h3>
+        <router-link :to="{ name: 'list'}"> <h3>Products</h3> </router-link>
       </div>
       <div class="slotHeader">
         <span >Total:{{ total }}</span>
-        <router-link to="/">
+        <router-link :to="{ name: 'basket'}"> 
           <button class="btn">Card <span>({{itemsCount}})</span></button>
         </router-link>
       </div>

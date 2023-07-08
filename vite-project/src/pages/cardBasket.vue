@@ -1,14 +1,13 @@
 <script setup>
-import templateUpCard from '../components/templateUpCard.vue';
 
 </script>
 
 <template>
-    <button class="btnBack">Back</button>
+    <router-link :to="{ name: 'list'}"> <button class="btnBack">Back</button> </router-link>
     <div class="slot">
         <div class="halfSlot">
 
-            <templateUpCard></templateUpCard>
+            
         </div>
         <div class="infoBlock">
             <p>Qty: 1</p>

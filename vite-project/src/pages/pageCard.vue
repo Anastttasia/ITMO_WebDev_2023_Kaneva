@@ -1,18 +1,69 @@
-<script setup>
+<script>
+import { useRoute } from "vue-router";
+
+import * as myModule from '../main.js';
+export default {
+    data() {
+        return {
+            count: 0,
+            id: 0,
+            price: 0,
+            title: '',
+            description: '',
+            image: '',
+        };
+    },
+    emits: ['card-update'],
+    methods: {
+        addToCart() {
+            myModule._addToCart(this.id)
+            this.$emit('updateTotal');
+            this.count = this.count + 1;
+        },
+        deleteFromCart() {
+            myModule._deleteFromCart(this.id)
+            this.$emit('updateTotal');
+            this.count = this.count - 1;
+        }
+    },
+
+    mounted() {
+        let cartData = myModule._getCartData();
+        let rawRardData = myModule._getRawData();
+
+        this.id = useRoute().params.id;
+
+        let index = this.id - 1;
+        this.price = rawRardData[index].price;
+        this.title = rawRardData[index].title;
+        this.description = rawRardData[index].description;
+        this.image = rawRardData[index].image;
+        this.count = 0;
+
+        if (cartData[this.id]) {
+            this.count = cartData[this.id].count;
+        }
+
+    }
+}
+
+
 </script>
 
 <template>
     <div class="pageCard">
         <div class="descriptionCard">
-            <button class="btnBack">Back</button>
-            <h3 class="name">Opna Women's Short Sleeve Moisture</h3>
-            <h4 class="price">$7.95</h4>
-            <p class="description">100% Polyester, Machine wash, 100% cationic polyester interlock,
-                Machine Wash & Pre Shrunk for a Great Fit, Lightweight
-            </p>
-            <button class="button">Add</button>
+            <router-link :to="{ name: 'list'}"> <button class="btnBack">Back</button> </router-link>
+            <h1 class="name">Пользователь ID {{ id }}</h1>
+            <h3 class="name">{{ title }}</h3>
+            <h4 class="price">{{ price }}</h4>
+            <p class="description">{{ description }}</p>
+            <div class="btnBlock">
+                <button class="buttonBin" v-on:click="deleteFromCart()" v-if="count > 0"><img src="../image/icon/delete.png" style="width: 15px; height: 15px;"></button>
+                <button class="button" v-on:click="addToCart()">Add<span v-if="count > 0"> ({{count}})</span></button>
+            </div>
         </div>
-        <div class="containerImg"><img src="../image/51eg55uWmdL._AC_UX679_.jpg " class="image"></div>
+        <div class="containerImg"><img :src="image" class="image"></div>
     </div>
 </template>
 
@@ -62,7 +113,26 @@
     color: rgba(43, 41, 41, 0.658);
 }
 
-.button {
+.btnBlock{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem ;
+    align-items: center;
+    justify-content:center;
+}
+.buttonBin{
+    width: 40px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgba(199, 42, 14, 0.226);
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin: 1rem 1rem 0 4px ;
+}
+.button{
     width: 100%;
     height: 35px;
     font-size: small;
@@ -72,8 +142,7 @@
     color: rgb(125, 199, 14);
     margin-top: 1rem;
 }
-
-.button:hover {
+.button:hover{
     background-color: rgba(125, 199, 14, 0.171);
 }
 

@@ -1,6 +1,5 @@
 <script>
-//import _addToCart from '../main.js';
-//import _deleteFromCart from '../main.js';
+
 import * as myModule from '../main.js';
 export default {
     props: ['title', 'price', 'description', 'image', 'id'],
@@ -34,14 +33,14 @@ export default {
 <template>
     <div class="card" :id="id">
         <div class="container">
-            <a>
+            <router-link :to="{ name: 'card', params: { id: this.id } }">
                 <div class="containerImg"><img :src="image" class="image"></div>
                 <div class="descriptionBlock">
                     <h3 class="name">{{ title }}</h3>
                     <h4 class="price"><p>$</p>{{ price }}</h4>
                     <p class="description">{{ description }}</p>
                 </div>
-            </a>
+            </router-link>
         </div>
         <div class="btnBlock">
             <button class="buttonBin" v-on:click="deleteFromCart()" v-if="count > 0"><img src="../image/icon/delete.png" style="width: 15px; height: 15px;"></button>

@@ -1,5 +1,5 @@
 <script>
-import TemplateCard from '../components/templateUpCard.vue';
+import TemplateCard from '../components/templateListCard.vue';
 const response = await fetch('https://fakestoreapi.com/products')
 const PRODUCTS_DATA = await response.json();
 
@@ -14,7 +14,6 @@ export default {
     methods: {
         update() {
             this.$emit('updateTotal');
-            //this.$emit('updateCart');
         },
     }
 };
