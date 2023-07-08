@@ -1,4 +1,23 @@
-<script setup>
+<script>
+
+export default {
+    props: {
+      total: {
+        type: Number,
+        default: 0,
+      },
+      itemsCount: {
+        type: Number,
+        default: 0,
+      }
+    } 
+    ,
+    data() {
+      return {}
+    },
+    methods: {
+    }
+}
 </script>
 
 <template>
@@ -7,9 +26,9 @@
         <h3>Products</h3>
       </div>
       <div class="slotHeader">
-        <span>Total:<p id=""></p></span>
+        <span >Total:{{ total }}</span>
         <router-link to="/">
-          <button class="btn">Card <p id=""></p></button>
+          <button class="btn">Card <span>({{itemsCount}})</span></button>
         </router-link>
       </div>
     </div>

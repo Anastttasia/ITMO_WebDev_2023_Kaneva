@@ -1,9 +1,38 @@
-<script setup>
-defineProps(['title', 'price', 'description', 'image'])
+<script>
+//import _addToCart from '../main.js';
+//import _deleteFromCart from '../main.js';
+import * as myModule from '../main.js';
+export default {
+    props: ['title', 'price', 'description', 'image', 'id'],
+    data() {
+        return {
+            count: 0
+        };
+    },
+    emits: ['card-update'],
+    methods: {
+        addToCart() {
+            myModule._addToCart(this.id)
+            this.$emit('card-update');
+            this.count = this.count + 1;
+        },
+        deleteFromCart() {
+            myModule._deleteFromCart(this.id)
+            this.$emit('card-update');
+            this.count = this.count - 1;
+        }
+    },
+    mounted() {
+        let cartData = myModule._getCartData();
+        if (cartData[this.id]) {
+            this.count = cartData[this.id].count
+        }
+    }
+}
 </script>
 
 <template>
-    <div class="card">
+    <div class="card" :id="id">
         <div class="container">
             <a>
                 <div class="containerImg"><img :src="image" class="image"></div>
@@ -15,8 +44,8 @@ defineProps(['title', 'price', 'description', 'image'])
             </a>
         </div>
         <div class="btnBlock">
-            <button class="buttonBin"><img src="../image/icon/delete.png" style="width: 15px; height: 15px;"></button>
-            <button class="button">Add</button>
+            <button class="buttonBin" v-on:click="deleteFromCart()" v-if="count > 0"><img src="../image/icon/delete.png" style="width: 15px; height: 15px;"></button>
+            <button class="button" v-on:click="addToCart()">Add<span v-if="count > 0"> ({{count}})</span></button>
         </div>
     </div>
 </template>

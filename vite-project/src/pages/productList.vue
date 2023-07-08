@@ -2,7 +2,6 @@
 import TemplateCard from '../components/templateUpCard.vue';
 const response = await fetch('https://fakestoreapi.com/products')
 const PRODUCTS_DATA = await response.json();
-console.log(PRODUCTS_DATA)
 
 export default {
     data() {
@@ -10,7 +9,14 @@ export default {
             products: PRODUCTS_DATA
         };
     },
-    components: { TemplateCard }
+    components: { TemplateCard },
+    emits: ['updateTotal', 'updateCart'],
+    methods: {
+        update() {
+            this.$emit('updateTotal');
+            //this.$emit('updateCart');
+        },
+    }
 };
 
 </script>
@@ -25,6 +31,8 @@ export default {
         :title="item.title"
         :price="item.price"
         :description="item.description"
+        :id="item.id"
+        v-on:card-update="update()"
       ></TemplateCard>
     </div>
 </div>
@@ -38,7 +46,6 @@ export default {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
-
 @media screen and (max-width: 1780px) {
   .cardsGrid {
     
@@ -48,7 +55,6 @@ export default {
     grid-row-gap: 1rem;
   }
 }
-
 @media screen and (max-width: 1230px) {
   .cardsGrid {
     display: grid;
@@ -57,13 +63,11 @@ export default {
     grid-row-gap: 1rem;
   }
 }
-
-
 @media (max-width: 640px) {
     .cardsGrid {
       display: flex;
       flex-direction: column;
-      margin: 2rem 0.5rem 0 0.5rem;
+      margin: 2rem ;
     }
 }
 </style>
