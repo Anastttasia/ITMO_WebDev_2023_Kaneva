@@ -46,8 +46,6 @@ export default {
 
     }
 }
-
-
 </script>
 
 <template>
@@ -88,6 +86,7 @@ export default {
 }
 
 .descriptionCard {
+    width: 50%;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -144,6 +143,12 @@ export default {
 }
 .button:hover{
     background-color: rgba(125, 199, 14, 0.171);
+}
+
+
+.image{
+    height: 80vh;
+    width: 100%;
 }
 
 @media (max-width: 640px) {
