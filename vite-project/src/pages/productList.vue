@@ -10,7 +10,7 @@ export default {
         };
     },
     components: { TemplateCard },
-    emits: ['updateTotal', 'updateCart'],
+    emits: ['updateTotal'],
     methods: {
         update() {
             this.$emit('updateTotal');

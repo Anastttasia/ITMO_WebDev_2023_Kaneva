@@ -1,8 +1,6 @@
 <script>
 import Header from './components/Header.vue'
 import ProductList from './pages/productList.vue';
-import PageCard from './pages/pageCard.vue';
-import Bascet from './pages/cardBasket.vue'
 
 import * as myModule from './main.js';
 
@@ -31,9 +29,6 @@ export default {
             
             this.total = Math.ceil(counterTotal);
             this.itemsCount = itemsCount;
-        },
-        updateItemsCount() {
-
         },
     },
     mounted() {

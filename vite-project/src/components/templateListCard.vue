@@ -55,6 +55,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        align-content:space-between;
         border-radius: 5px;
         color: black;
         padding: 5px 5px 0.5rem 5px;
@@ -78,6 +79,7 @@ export default {
         padding: 0 4px 0 4px;
     }
     .name{
+        height: 3rem;
         font-weight: 700;
         font-size: 18px;
         color: rgba(43, 41, 41, 0.658);

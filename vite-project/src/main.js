@@ -7,18 +7,8 @@ import PageCard from './pages/pageCard.vue';
 import Basket from './pages/cardBasket.vue'
 import App from './App.vue'
 
-// let response = await fetch('https://fakestoreapi.com/products')
-
-// const PRODUCTS_DATA = await response.json();
-
-// console.log(PRODUCTS_DATA)
-// for (let i = 0; i < PRODUCTS_DATA.length; i++) {
-//     console.log(PRODUCTS_DATA[i].title);
-// }
 const response = await fetch('https://fakestoreapi.com/products')
 const PRODUCTS_DATA = await response.json();
-console.log(PRODUCTS_DATA)
-
 
 const router = createRouter({
     routes: [
@@ -47,17 +37,6 @@ const app = createApp(App);
 app.use(router);
 app.mount('#app');
 
-//let ddd = {};
-//
-//for (let i = 0; i < 10; i++) {
-//    ddd[i] = i + 2;
-//}
-//console.log(ddd)
-//
-//for (var key in ddd) {
-//    console.log(ddd[key]);
-//}
-
 function saveDataLocal() {
     localStorage.setItem("cartData", JSON.stringify(CHART_DATA));
 }
@@ -71,7 +50,6 @@ function getAllLocalData() {
 }
 
 export function _addToCart(index) {
-    console.log("_addToCart ::: " + index)
     let item = CHART_DATA[index];
     if (item) {
         item.count = item.count + 1;
@@ -82,19 +60,17 @@ export function _addToCart(index) {
             count: 1
         }
     }
-    console.log(CHART_DATA)
     saveDataLocal()
 }
 
 export function _deleteFromCart(index) {
     let item = CHART_DATA[index];
     if (item && item.count == 1) {
-        CHART_DATA[index] = null;
+        delete CHART_DATA[index];
     }
     else if (item) {
         item.count = item.count - 1;
     }
-    console.log(CHART_DATA)
     saveDataLocal()
 }
 
